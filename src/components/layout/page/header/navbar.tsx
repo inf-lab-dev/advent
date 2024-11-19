@@ -12,42 +12,41 @@ import {
     SheetTitle,
     SheetTrigger,
 } from '@/components/ui/sheet';
+import { AdventSunday, toLiteral } from '@/lib/advent';
 import { FlaskConical, Gift, Menu } from 'lucide-react';
 import Link from 'next/link';
+import { usePathname } from 'next/navigation';
 import { useState } from 'react';
 import { buttonVariants } from '../../../ui/button';
 import { ModeToggle } from './mode-toggle';
+
+export interface Props {
+    sundays: AdventSunday[];
+}
 
 interface RouteProps {
     href: string;
     label: string;
 }
 
-const routeList: RouteProps[] = [
-    {
-        href: '/advent/first',
-        label: '1. Advent',
-    },
-    {
-        href: '/advent/second',
-        label: '2. Advent',
-    },
-    {
-        href: '/advent/third',
-        label: '3. Advent',
-    },
-    {
-        href: '/advent/fourth',
-        label: '4. Advent',
-    },
+const DEFAULT_ROUTE_LIST: RouteProps[] = [
     {
         href: '/faq',
         label: 'FAQ',
     },
 ];
 
-export function Navbar() {
+export function Navbar({ sundays }: Props) {
     const [isOpen, setIsOpen] = useState(false);
+    const pathname = usePathname();
+
+    const routeList: RouteProps[] = [
+        ...sundays.map((sunday) => ({
+            label: `${sunday}. Advent`,
+            href: `/advent/${toLiteral(sunday)}`,
+        })),
+        ...DEFAULT_ROUTE_LIST,
+    ];
 
     return (
         <>
@@ -86,23 +85,22 @@ export function Navbar() {
                                         </SheetTitle>
                                     </SheetHeader>
                                     <nav className="mt-4 flex flex-col items-center justify-center gap-2">
-                                        {routeList.map(
-                                            ({ href, label }: RouteProps) => (
-                                                <Link
-                                                    rel="noreferrer noopener"
-                                                    key={label}
-                                                    href={href}
-                                                    onClick={() =>
-                                                        setIsOpen(false)
-                                                    }
-                                                    className={buttonVariants({
-                                                        variant: 'ghost',
-                                                    })}
-                                                >
-                                                    {label}
-                                                </Link>
-                                            ),
-                                        )}
+                                        {routeList.map(({ href, label }) => (
+                                            <Link
+                                                rel="noreferrer noopener"
+                                                key={label}
+                                                href={href}
+                                                onClick={() => setIsOpen(false)}
+                                                className={buttonVariants({
+                                                    variant:
+                                                        pathname === href
+                                                            ? 'default'
+                                                            : 'ghost',
+                                                })}
+                                            >
+                                                {label}
+                                            </Link>
+                                        ))}
                                         <a
                                             rel="noreferrer noopener"
                                             href="https://inf-lab.dev"
@@ -123,16 +121,19 @@ export function Navbar() {
 
                         {/* desktop */}
                         <nav className="hidden gap-2 md:flex">
-                            {routeList.map((route: RouteProps, i) => (
+                            {routeList.map(({ href, label }, i) => (
                                 <Link
                                     rel="noreferrer noopener"
-                                    href={route.href}
+                                    href={href}
                                     key={i}
                                     className={`text-[17px] ${buttonVariants({
-                                        variant: 'ghost',
+                                        variant:
+                                            pathname == href
+                                                ? 'default'
+                                                : 'ghost',
                                     })}`}
                                 >
-                                    {route.label}
+                                    {label}
                                 </Link>
                             ))}
                         </nav>

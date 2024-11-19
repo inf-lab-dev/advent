@@ -1,12 +1,22 @@
 import AdventWreath from '@/components/advent-wreath';
-import { Advent, toLiteral } from '@/lib/advent';
+import { Advent, fromLiteral, toLiteral } from '@/lib/advent';
 import { fetchAdventData } from '@/lib/advent/loader';
+import { Metadata } from 'next';
 import { notFound } from 'next/navigation';
 
 export interface Props {
     params: Promise<{
         advent: Advent;
     }>;
+}
+
+export async function generateMetadata({ params }: Props): Promise<Metadata> {
+    const { advent } = await params;
+    const sunday = fromLiteral(advent)!;
+
+    return {
+        title: `${sunday}. Advent`,
+    };
 }
 
 export async function generateStaticParams() {
@@ -29,12 +39,13 @@ export default async function TaskDescription({ params }: Props) {
 
     return (
         <article className="container">
-            <aside className="mb-4 md:float-right md:max-w-[40%]">
+            <aside className="mb-4 ml-24 md:float-right md:max-w-[40%]">
                 <AdventWreath advent={task.sunday} />
             </aside>
             <h1 className="text-[3.7rem] font-bold">{task.title}</h1>
+            <hr className="mb-3 border-t-2 border-muted dark:border-muted-foreground" />
             <div
-                className="prose dark:prose-invert max-w-none"
+                className="prose max-w-none dark:prose-invert"
                 dangerouslySetInnerHTML={{ __html: task.content }}
             />
         </article>

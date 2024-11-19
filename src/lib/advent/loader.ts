@@ -12,15 +12,11 @@ interface FrontMatter {
     title: string;
 }
 
-function getPossibleSunday(tasks: Tasks): AdventSunday | null {
-    const keys = Object.keys(tasks);
-
-    const sunday = keys
-        .map(Number)
-        .reduce(
-            (previous, current) => (current > previous ? current : previous),
-            0,
-        ) as AdventSunday | 0;
+function getSunday(tasks: Tasks): AdventSunday | null {
+    const sunday = (tasks.sundays as number[]).reduce(
+        (previous, current) => (current > previous ? current : previous),
+        0,
+    ) as AdventSunday | 0;
 
     if (sunday === 0) {
         return null;
@@ -72,7 +68,7 @@ async function fetchData(): Promise<
 > {
     const tasks = await fetchTasks();
 
-    return [getPossibleSunday(tasks), tasks];
+    return [getSunday(tasks), tasks];
 }
 
 export const fetchAdventData = cache(fetchData);

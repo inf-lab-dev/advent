@@ -17,7 +17,7 @@ export class Tasks {
         return Array.from(this.map.keys());
     }
 
-    public get tasks(): Task[] {
+    public get entries(): Task[] {
         return Array.from(this.map.values());
     }
 

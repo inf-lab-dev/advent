@@ -1,8 +1,9 @@
 import AdventWreath from '@/components/advent-wreath';
-import { Button, buttonVariants } from '@/components/ui/button';
+import { buttonVariants } from '@/components/ui/button';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { fetchAdventData } from '@/lib/advent/loader';
 import { DoorOpen } from 'lucide-react';
+import Link from 'next/link';
 
 export default async function Home() {
     const [advent] = await fetchAdventData();
@@ -18,7 +19,7 @@ export default async function Home() {
                             </span>
                             <span>&nbsp;of&nbsp;</span>
                             <span className="inline whitespace-nowrap bg-gradient-to-r from-yellow-500 via-orange-500 to-red-700 bg-clip-text text-transparent">
-                                Inf-Einf
+                                Inf-Labs
                             </span>
                         </h1>
                     </main>
@@ -38,9 +39,14 @@ export default async function Home() {
                             Los gehts!
                         </a>
 
-                        <Button className="w-full md:w-1/3" variant="outline">
-                            TODO: THIS
-                        </Button>
+                        <Link
+                            href="/faq"
+                            className={`w-full md:w-1/3 ${buttonVariants({
+                                variant: 'outline',
+                            })}`}
+                        >
+                            Häufig gestellte Fragen
+                        </Link>
                     </div>
                 </div>
 
