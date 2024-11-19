@@ -1,12 +1,8 @@
 import fs from 'node:fs/promises';
 import path from 'node:path';
 import { cache } from 'react';
-import { remark } from 'remark';
-import frontmatter from 'remark-frontmatter';
-import yamlFrontmatter from 'remark-frontmatter-yaml';
-import gfm from 'remark-gfm';
-import html from 'remark-html';
 import { AdventSunday } from '.';
+import { renderMarkdown } from '../markdown';
 import { Task, Tasks } from './task';
 
 const TASKS_FOLDER = './tasks';
@@ -38,25 +34,18 @@ async function fetchTasks(): Promise<Tasks> {
 
     const taskFiles = await fs.readdir(TASKS_FOLDER, { withFileTypes: true });
 
-    const renderer = remark()
-        .use(html)
-        .use(frontmatter)
-        .use(yamlFrontmatter)
-        .use(gfm);
-
     for (const taskFile of taskFiles) {
         if (!taskFile.isFile()) {
             continue;
         }
 
-        const content = await fs.readFile(
+        const markdown = await fs.readFile(
             path.join(TASKS_FOLDER, taskFile.name),
             { encoding: 'utf-8' },
         );
 
-        const file = await renderer.process(content);
-        const { advent, title } = (file.data.frontmatter ??
-            {}) as Partial<FrontMatter>;
+        const [content, { advent, title }] =
+            await renderMarkdown<Partial<FrontMatter>>(markdown);
 
         if (!advent || isNaN(advent) || advent > 4 || advent < 1) {
             throw new TypeError(
@@ -70,8 +59,8 @@ async function fetchTasks(): Promise<Tasks> {
 
         taskList.push({
             title,
+            content,
             sunday: advent,
-            content: file.toString(),
         });
     }
 

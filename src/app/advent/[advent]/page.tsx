@@ -1,3 +1,4 @@
+import AdventWreath from '@/components/advent-wreath';
 import { Advent, toLiteral } from '@/lib/advent';
 import { fetchAdventData } from '@/lib/advent/loader';
 import { notFound } from 'next/navigation';
@@ -28,9 +29,12 @@ export default async function TaskDescription({ params }: Props) {
 
     return (
         <article className="container">
-            <h1>{task.title}</h1>
+            <aside className="mb-4 md:float-right md:max-w-[40%]">
+                <AdventWreath advent={task.sunday} />
+            </aside>
+            <h1 className="text-[3.7rem] font-bold">{task.title}</h1>
             <div
-                className="prose dark:prose-invert"
+                className="prose dark:prose-invert max-w-none"
                 dangerouslySetInnerHTML={{ __html: task.content }}
             />
         </article>
