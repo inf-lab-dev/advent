@@ -1,5 +1,8 @@
 'use client';
 
+import ErrorPage from '@/components/layout/error';
+import { Button } from '@/components/ui/button';
+
 export interface Props {
     error: Error;
     reset: VoidFunction;
@@ -7,10 +10,8 @@ export interface Props {
 
 export default function GlobalError({ error, reset }: Props) {
     return (
-        <div>
-            <p>Oh no! An Error</p>
-            <p>{error.message}</p>
-            <button onClick={reset}>Retry</button>
-        </div>
+        <ErrorPage icon="tree" code={500} text={error.message}>
+            <Button onClick={reset}>Erneut versuchen</Button>
+        </ErrorPage>
     );
 }

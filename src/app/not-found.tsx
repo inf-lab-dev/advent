@@ -1,7 +1,11 @@
+import ErrorPage from '@/components/layout/error';
+
 export default function NotFound() {
     return (
-        <div>
-            <p>Oh no! 404 - Page Not Found!</p>
-        </div>
+        <ErrorPage
+            icon="cane"
+            code={404}
+            text="Die angeforderte Seite konnte leider nicht gefunden werden."
+        />
     );
 }

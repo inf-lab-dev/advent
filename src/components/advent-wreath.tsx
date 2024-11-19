@@ -1,3 +1,4 @@
+import { AdventSunday } from '@/lib/advent';
 import Image from 'next/image';
 import fourthAdvent from '../../public/advent-wreath/four.svg';
 import firstAdvent from '../../public/advent-wreath/one.svg';
@@ -6,7 +7,7 @@ import secondAdvent from '../../public/advent-wreath/two.svg';
 import noAdvent from '../../public/advent-wreath/zero.svg';
 
 export interface Props {
-    advent: 0 | 1 | 2 | 3 | 4;
+    advent: null | AdventSunday;
 }
 
 const IMAGES = [noAdvent, firstAdvent, secondAdvent, thirdAdvent, fourthAdvent];
@@ -16,8 +17,8 @@ export default function AdventWreath({ advent }: Props) {
         <div>
             <Image
                 priority
-                src={IMAGES[advent]}
-                alt={`Adventskranz mit ${advent} brennenden Kerzen`}
+                src={IMAGES[advent ?? 0]}
+                alt={`Adventskranz mit ${advent ?? 0} brennenden Kerzen`}
             />
         </div>
     );

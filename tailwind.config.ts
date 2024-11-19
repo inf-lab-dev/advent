@@ -1,12 +1,21 @@
+import tailwindTypograpy from '@tailwindcss/typography';
 import type { Config } from 'tailwindcss';
 import tailwindAnimate from 'tailwindcss-animate';
 
 export default {
+    darkMode: 'class',
     content: [
         './src/components/**/*.{js,ts,tsx}',
         './src/app/**/*.{js,ts,jsx,tsx}',
     ],
     theme: {
+        container: {
+            center: true,
+            padding: '1.5rem',
+            screens: {
+                '2xl': '1400px',
+            },
+        },
         extend: {
             colors: {
                 background: 'hsl(var(--background))',
@@ -57,5 +66,5 @@ export default {
             },
         },
     },
-    plugins: [tailwindAnimate],
+    plugins: [tailwindAnimate, tailwindTypograpy],
 } satisfies Config;
