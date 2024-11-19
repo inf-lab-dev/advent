@@ -30,7 +30,7 @@ export default async function TaskDescription({ params }: Props) {
         <article className="container">
             <h1>{task.title}</h1>
             <div
-                className="prose"
+                className="prose dark:prose-invert"
                 dangerouslySetInnerHTML={{ __html: task.content }}
             />
         </article>
