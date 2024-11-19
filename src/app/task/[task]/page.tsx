@@ -24,7 +24,7 @@ export default async function TaskDescription({ params }: Props) {
     return (
         <div>
             <p>Task description page</p>
-            <p>You've requested {task}!</p>
+            <p>You have requested {task}!</p>
         </div>
     );
 }
