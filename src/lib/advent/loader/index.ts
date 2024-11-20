@@ -2,15 +2,18 @@ import { renderMarkdown } from '@/lib/markdown';
 import fs from 'node:fs/promises';
 import path from 'node:path';
 import { cache } from 'react';
-import { Task, Tasks } from '..';
+import { FileContent, Task, Tasks } from '..';
 import { FILE_NAME, loadManifest } from './manifest';
 
 const TASKS_FOLDER = './content/tasks';
 
-async function loadMarkdown(filePath: string): Promise<string> {
+async function loadMarkdown(
+    filePath: string,
+    isEncrypted = false,
+): Promise<FileContent> {
     const markdown = await fs.readFile(filePath, { encoding: 'utf-8' });
 
-    return renderMarkdown(markdown);
+    return isEncrypted ? { encrypted: markdown } : renderMarkdown(markdown);
 }
 
 async function loadTasks(): Promise<Tasks> {
@@ -50,6 +53,7 @@ async function loadTasks(): Promise<Tasks> {
                               taskDirectory.name,
                               manifest.files.solution,
                           ),
+                          !manifest.is_solution_public,
                       )
                     : null,
             },

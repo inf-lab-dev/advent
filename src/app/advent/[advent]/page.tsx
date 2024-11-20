@@ -1,5 +1,6 @@
 import Page from '@/components/page/advent/page';
 import SolutionNote from '@/components/page/advent/solution-note';
+import { resolveMarkdownContent } from '@/lib/advent';
 import {
     extractTask,
     generateAdventMetadata,
@@ -18,9 +19,16 @@ export async function generateStaticParams() {
 
 export default async function TaskDescription({ params }: PageProps) {
     const task = await extractTask(params);
+    const content = await resolveMarkdownContent(task.files.content);
+
+    if (content === null) {
+        throw new TypeError(
+            `Could not resolve description for task "${task.slug}".`,
+        );
+    }
 
     return (
-        <Page content={task.files.content} task={task}>
+        <Page content={content} task={task}>
             {task.files.solution && (
                 <SolutionNote
                     decrypted={task.manifest.is_solution_public}

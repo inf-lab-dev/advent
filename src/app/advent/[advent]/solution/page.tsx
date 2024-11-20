@@ -2,7 +2,7 @@ import ErrorPage from '@/components/layout/error';
 import Page from '@/components/page/advent/page';
 import SolutionNote from '@/components/page/advent/solution-note';
 import { buttonVariants } from '@/components/ui/button';
-import { Task } from '@/lib/advent';
+import { resolveMarkdownContent, Task } from '@/lib/advent';
 import {
     extractTask,
     generateAdventMetadata,
@@ -13,7 +13,6 @@ import {
 import { Metadata } from 'next';
 import Link from 'next/link';
 import { notFound } from 'next/navigation';
-import { decrypt } from 'solution-zone';
 
 type SearchParams = Record<string, string | string[] | undefined>;
 
@@ -36,21 +35,14 @@ async function decryptSolution(
     const task = await extractTask(params);
     const { key } = await searchParams;
 
-    let content: string | null = task.files.solution;
-
-    if (content === null) {
+    if (task.files.solution === null) {
         notFound();
-    } else if (!task.manifest.is_solution_public) {
-        if (typeof key !== 'string') {
-            content = null;
-        } else {
-            try {
-                content = await decrypt(key as string, content);
-            } catch {
-                content = null;
-            }
-        }
     }
+
+    const content = await resolveMarkdownContent(
+        task.files.solution,
+        typeof key !== 'string' ? undefined : key,
+    );
 
     return [task, content];
 }

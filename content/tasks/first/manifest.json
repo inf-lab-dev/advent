@@ -9,6 +9,6 @@
     },
     "files": {
         "content": "./index.md",
-        "solution": "./index.md"
+        "solution": "./solution.md"
     }
 }
