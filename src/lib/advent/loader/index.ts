@@ -1,11 +1,17 @@
+import { renderMarkdown } from '@/lib/markdown';
 import fs from 'node:fs/promises';
 import path from 'node:path';
 import { cache } from 'react';
 import { Task, Tasks } from '..';
 import { FILE_NAME, loadManifest } from './manifest';
-import { loadMarkdown } from './markdown';
 
 const TASKS_FOLDER = './content/tasks';
+
+async function loadMarkdown(filePath: string): Promise<string> {
+    const markdown = await fs.readFile(filePath, { encoding: 'utf-8' });
+
+    return renderMarkdown(markdown);
+}
 
 async function loadTasks(): Promise<Tasks> {
     const taskDirectories = await fs.readdir(TASKS_FOLDER, {

@@ -1,7 +1,6 @@
 import hljs from 'highlight.js';
 import { Marked } from 'marked';
 import { markedHighlight } from 'marked-highlight';
-import fs from 'node:fs/promises';
 
 const renderer = new Marked(
     markedHighlight({
@@ -12,9 +11,7 @@ const renderer = new Marked(
     }),
 );
 
-export async function loadMarkdown(filePath: string): Promise<string> {
-    const markdown = await fs.readFile(filePath, { encoding: 'utf-8' });
-
+export function renderMarkdown(markdown: string): string {
     return renderer.parse(markdown, {
         async: false,
     });
