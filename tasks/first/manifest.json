@@ -1,7 +1,7 @@
 {
     "advent": 1,
     "title": "Aufgabentitel",
-    "is_solution_public": true,
+    "is_solution_public": false,
     "files": {
         "content": "./index.md",
         "solution": "./solution.md"

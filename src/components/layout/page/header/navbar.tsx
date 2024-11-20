@@ -93,7 +93,9 @@ export function Navbar({ sundays }: Props) {
                                                 onClick={() => setIsOpen(false)}
                                                 className={buttonVariants({
                                                     variant:
-                                                        pathname === href
+                                                        pathname.startsWith(
+                                                            href,
+                                                        )
                                                             ? 'default'
                                                             : 'ghost',
                                                 })}
@@ -127,10 +129,9 @@ export function Navbar({ sundays }: Props) {
                                     href={href}
                                     key={i}
                                     className={`text-[17px] ${buttonVariants({
-                                        variant:
-                                            pathname == href
-                                                ? 'default'
-                                                : 'ghost',
+                                        variant: pathname.startsWith(href)
+                                            ? 'default'
+                                            : 'ghost',
                                     })}`}
                                 >
                                     {label}
