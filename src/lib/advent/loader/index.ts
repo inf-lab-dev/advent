@@ -1,59 +1,56 @@
 import fs from 'node:fs/promises';
 import path from 'node:path';
 import { cache } from 'react';
-import { AdventSunday } from '..';
-import { Task, Tasks } from '../task';
+import { Task, Tasks } from '..';
 import { FILE_NAME, loadManifest } from './manifest';
 import { loadMarkdown } from './markdown';
 
 const TASKS_FOLDER = './tasks';
 
-function getSunday(tasks: Tasks): AdventSunday | null {
-    const sunday = (tasks.sundays as number[]).reduce(
-        (previous, current) => (current > previous ? current : previous),
-        0,
-    ) as AdventSunday | 0;
-
-    if (sunday === 0) {
-        return null;
-    }
-
-    return sunday;
-}
-
 async function loadTasks(): Promise<Tasks> {
-    const taskFiles = await fs.readdir(TASKS_FOLDER, { withFileTypes: true });
-    const taskList: Task[] = [];
+    const taskDirectories = await fs.readdir(TASKS_FOLDER, {
+        withFileTypes: true,
+    });
+    const tasks = new Map<string, Task>();
 
-    for (const taskFile of taskFiles) {
-        if (!taskFile.isDirectory()) {
+    for (const taskDirectory of taskDirectories) {
+        if (!taskDirectory.isDirectory()) {
             continue;
         }
 
         const manifest = await loadManifest(
-            path.join(TASKS_FOLDER, taskFile.name, FILE_NAME),
+            path.join(TASKS_FOLDER, taskDirectory.name, FILE_NAME),
         );
 
-        taskList.push({
+        if (manifest.is_draft) {
+            continue;
+        }
+
+        tasks.set(taskDirectory.name, {
+            slug: taskDirectory.name,
             manifest,
-            content: await loadMarkdown(
-                path.join(TASKS_FOLDER, taskFile.name, manifest.files.content),
-            ),
-            solution: await loadMarkdown(
-                path.join(TASKS_FOLDER, taskFile.name, manifest.files.solution),
-            ),
+            files: {
+                content: await loadMarkdown(
+                    path.join(
+                        TASKS_FOLDER,
+                        taskDirectory.name,
+                        manifest.files.content,
+                    ),
+                ),
+                solution: manifest.files.solution
+                    ? await loadMarkdown(
+                          path.join(
+                              TASKS_FOLDER,
+                              taskDirectory.name,
+                              manifest.files.solution,
+                          ),
+                      )
+                    : null,
+            },
         });
     }
 
-    return new Tasks(taskList);
+    return tasks;
 }
 
-async function loadData(): Promise<
-    [sunday: null | AdventSunday, tasks: Tasks]
-> {
-    const tasks = await loadTasks();
-
-    return [getSunday(tasks), tasks];
-}
-
-export const fetchAdventData = cache(loadData);
+export const fetchAdventTasks = cache(loadTasks);

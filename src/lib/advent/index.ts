@@ -1,21 +1,12 @@
-export type AdventSunday = 1 | 2 | 3 | 4;
+import { Manifest } from './loader/manifest';
 
-export type Advent = (typeof LITERALS)[number];
+export type Tasks = Map<string, Task>;
 
-const LITERALS = ['first', 'second', 'third', 'fourth'] as const;
-
-export function toLiteral(sunday: AdventSunday) {
-    return LITERALS[sunday - 1];
-}
-
-export function fromLiteral(
-    literal: (typeof LITERALS)[number],
-): AdventSunday | null {
-    const sunday = LITERALS.indexOf(literal) + 1;
-
-    if (sunday > 4 || sunday < 1) {
-        return null;
-    }
-
-    return sunday as AdventSunday;
+export interface Task {
+    slug: string;
+    manifest: Manifest;
+    files: {
+        content: string;
+        solution: string | null;
+    };
 }

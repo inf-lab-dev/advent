@@ -1,12 +1,22 @@
 import AdventWreath from '@/components/advent-wreath';
 import { buttonVariants } from '@/components/ui/button';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
-import { fetchAdventData } from '@/lib/advent/loader';
+import { fetchAdventTasks } from '@/lib/advent/loader';
 import { DoorOpen } from 'lucide-react';
 import Link from 'next/link';
 
+async function getHighestCandle() {
+    const tasks = await fetchAdventTasks();
+
+    return Array.from(tasks.values()).reduce(
+        (previous, { manifest: { candles } }) =>
+            candles > previous ? candles : previous,
+        0,
+    );
+}
+
 export default async function Home() {
-    const [advent] = await fetchAdventData();
+    const candles = await getHighestCandle();
 
     return (
         <div>
@@ -31,19 +41,19 @@ export default async function Home() {
 
                     <div className="space-y-4 md:space-x-4 md:space-y-0">
                         <a
-                            href="#how-does-it-work"
                             className={`w-full md:w-1/3 ${buttonVariants({
                                 variant: 'default',
                             })}`}
+                            href="#how-does-it-work"
                         >
                             Los gehts!
                         </a>
 
                         <Link
-                            href="/faq"
                             className={`w-full md:w-1/3 ${buttonVariants({
                                 variant: 'outline',
                             })}`}
+                            href="/faq"
                         >
                             Häufig gestellte Fragen
                         </Link>
@@ -51,7 +61,7 @@ export default async function Home() {
                 </div>
 
                 <div className="relative z-10">
-                    <AdventWreath advent={advent} />
+                    <AdventWreath candles={candles} />
 
                     {/* Shadow effect */}
                     <div className="absolute left-[25%] top-0 -z-[1] h-[120%] w-[50%] rotate-[35deg] border-r-[24px] bg-yellow-300 blur-[150px] will-change-transform motion-safe:animate-pulse"></div>
@@ -73,8 +83,8 @@ export default async function Home() {
             </section>
 
             <section
-                id="how-does-it-work"
                 className="container py-24 text-center sm:py-32"
+                id="how-does-it-work"
             >
                 <h2 className="text-3xl font-bold md:text-4xl">
                     So&nbsp;
@@ -133,15 +143,15 @@ export default async function Home() {
                 <p>
                     Image by&nbsp;
                     <a
-                        href="https://pixabay.com/users/openclipart-vectors-30363"
                         className="text-blue-800 hover:underline"
+                        href="https://pixabay.com/users/openclipart-vectors-30363"
                     >
                         OpenClipart-Vectors
                     </a>
                     &nbsp;from&nbsp;
                     <a
-                        href="https://pixabay.com/"
                         className="text-blue-800 hover:underline"
+                        href="https://pixabay.com/"
                     >
                         Pixabay
                     </a>

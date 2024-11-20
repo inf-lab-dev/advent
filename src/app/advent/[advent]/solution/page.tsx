@@ -1,70 +1,68 @@
 import ErrorPage from '@/components/layout/error';
-import Page, { extractTask, Params } from '@/components/page/advent/page';
+import Page from '@/components/page/advent/page';
 import SolutionNote from '@/components/page/advent/solution-note';
 import { buttonVariants } from '@/components/ui/button';
-import { Advent, fromLiteral, toLiteral } from '@/lib/advent';
-import { fetchAdventData } from '@/lib/advent/loader';
-import { Task } from '@/lib/advent/task';
+import { Task } from '@/lib/advent';
+import {
+    extractTask,
+    generateAdventMetadata,
+    generateStaticAdventParams,
+    PageProps,
+    UrlParams,
+} from '@/lib/advent/util/next';
 import { Metadata } from 'next';
 import Link from 'next/link';
+import { notFound } from 'next/navigation';
 import { decrypt } from 'solution-zone';
 
 type SearchParams = Record<string, string | string[] | undefined>;
 
-export interface Props {
-    params: Promise<Params>;
+interface Props extends PageProps {
     searchParams: Promise<SearchParams>;
 }
 
-export async function generateMetadata({ params }: Props): Promise<Metadata> {
-    const { advent } = await params;
-    const sunday = fromLiteral(advent)!;
-
-    return {
-        title: `Lösung zum ${sunday}. Advent`,
-    };
+export async function generateMetadata(props: PageProps): Promise<Metadata> {
+    return await generateAdventMetadata(props, 'Lösung für %s');
 }
 
 export async function generateStaticParams() {
-    const [, tasks] = await fetchAdventData();
-
-    return tasks.sundays.map((sunday) => ({
-        advent: toLiteral(sunday),
-    }));
+    return await generateStaticAdventParams(true);
 }
 
 async function decryptSolution(
-    params: Promise<Params>,
+    params: Promise<UrlParams>,
     searchParams: Promise<SearchParams>,
-): Promise<[advent: Advent, task: Task, content: string | null]> {
-    const [advent, task] = await extractTask(params);
+): Promise<[task: Task, content: string | null]> {
+    const task = await extractTask(params);
     const { key } = await searchParams;
 
-    let content: string | null = task.solution;
+    let content: string | null = task.files.solution;
 
-    if (!task.manifest.is_solution_public) {
+    if (content === null) {
+        notFound();
+    } else if (!task.manifest.is_solution_public) {
         if (typeof key !== 'string') {
             content = null;
         } else {
             try {
-                content = await decrypt(key as string, task.solution);
+                content = await decrypt(key as string, content);
             } catch {
                 content = null;
             }
         }
     }
 
-    return [advent, task, content];
+    return [task, content];
 }
 
 export default async function TaskSolution({ params, searchParams }: Props) {
-    const [advent, task, content] = await decryptSolution(params, searchParams);
+    const [task, content] = await decryptSolution(params, searchParams);
 
     return content ? (
-        <Page titleTemplate="Lösung für „%s“" task={task} content={content}>
+        <Page content={content} task={task} titleTemplate="Lösung für „%s“">
             <Link
                 className={`w-full ${buttonVariants({ variant: 'secondary' })}`}
-                href={`/advent/${advent}`}
+                href={`/advent/${task.slug}`}
             >
                 Zurück zur Aufgabenstellung
             </Link>
@@ -76,11 +74,11 @@ export default async function TaskSolution({ params, searchParams }: Props) {
             text="Das eingegebene Passwort ist leider falsch."
         >
             <div className="flex flex-col gap-5 lg:w-1/2">
-                <SolutionNote advent={advent} decrypted={false} />
+                <SolutionNote decrypted={false} slug={task.slug} />
 
                 <Link
                     className={buttonVariants({ variant: 'outline' })}
-                    href={`/advent/${advent}`}
+                    href={`/advent/${task.slug}`}
                 >
                     Zurück zur Aufgabenstellung
                 </Link>

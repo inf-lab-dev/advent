@@ -12,8 +12,9 @@ import {
     SheetTitle,
     SheetTrigger,
 } from '@/components/ui/sheet';
-import { AdventSunday, toLiteral } from '@/lib/advent';
-import { FlaskConical, Gift, Menu } from 'lucide-react';
+import { Tasks } from '@/lib/advent';
+import { getNavigationEntries } from '@/lib/advent/util';
+import { CircleHelp, Gift, Menu } from 'lucide-react';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import { useState } from 'react';
@@ -21,32 +22,19 @@ import { buttonVariants } from '../../../ui/button';
 import { ModeToggle } from './mode-toggle';
 
 export interface Props {
-    sundays: AdventSunday[];
+    tasks: Tasks;
 }
 
-interface RouteProps {
-    href: string;
-    label: string;
-}
+const faqButtonClasses = (pathname: string) =>
+    buttonVariants({
+        variant: pathname === '/faq' ? 'default' : 'secondary',
+    });
 
-const DEFAULT_ROUTE_LIST: RouteProps[] = [
-    {
-        href: '/faq',
-        label: 'FAQ',
-    },
-];
-
-export function Navbar({ sundays }: Props) {
+export function Navbar({ tasks }: Props) {
     const [isOpen, setIsOpen] = useState(false);
     const pathname = usePathname();
 
-    const routeList: RouteProps[] = [
-        ...sundays.map((sunday) => ({
-            label: `${sunday}. Advent`,
-            href: `/advent/${toLiteral(sunday)}`,
-        })),
-        ...DEFAULT_ROUTE_LIST,
-    ];
+    const routeList = getNavigationEntries(tasks);
 
     return (
         <>
@@ -56,9 +44,9 @@ export function Navbar({ sundays }: Props) {
                     <NavigationMenuList className="container flex h-14 w-screen justify-between px-4">
                         <NavigationMenuItem className="flex font-bold text-primary">
                             <Link
-                                rel="noreferrer noopener"
-                                href="/"
                                 className="ml-2 flex items-center justify-center gap-1 text-xl font-bold"
+                                href="/"
+                                rel="noreferrer noopener"
                             >
                                 <Gift />
                                 Inf-Labs im Advent
@@ -66,15 +54,15 @@ export function Navbar({ sundays }: Props) {
                         </NavigationMenuItem>
 
                         {/* mobile */}
-                        <div className="flex md:hidden">
+                        <div className="flex lg:hidden">
                             <ModeToggle />
 
                             <Sheet open={isOpen} onOpenChange={setIsOpen}>
                                 <SheetTrigger className="px-2">
                                     <Menu
-                                        className="flex h-5 w-5 md:hidden"
-                                        onClick={() => setIsOpen(true)}
                                         aria-description="Menü öffnen"
+                                        className="flex h-5 w-5 lg:hidden"
+                                        onClick={() => setIsOpen(true)}
                                     />
                                 </SheetTrigger>
 
@@ -85,70 +73,69 @@ export function Navbar({ sundays }: Props) {
                                         </SheetTitle>
                                     </SheetHeader>
                                     <nav className="mt-4 flex flex-col items-center justify-center gap-2">
-                                        {routeList.map(({ href, label }) => (
-                                            <Link
-                                                rel="noreferrer noopener"
-                                                key={label}
-                                                href={href}
-                                                onClick={() => setIsOpen(false)}
-                                                className={buttonVariants({
-                                                    variant:
-                                                        pathname.startsWith(
-                                                            href,
-                                                        )
-                                                            ? 'default'
-                                                            : 'ghost',
-                                                })}
-                                            >
-                                                {label}
-                                            </Link>
-                                        ))}
-                                        <a
-                                            rel="noreferrer noopener"
-                                            href="https://inf-lab.dev"
-                                            target="_blank"
-                                            className={`w-[110px] border ${buttonVariants(
-                                                {
-                                                    variant: 'secondary',
-                                                },
-                                            )}`}
+                                        {routeList.map(
+                                            ({ href, label, children }) => (
+                                                <Link
+                                                    key={label}
+                                                    className={`w-full ${buttonVariants(
+                                                        {
+                                                            variant:
+                                                                children.includes(
+                                                                    pathname,
+                                                                )
+                                                                    ? 'default'
+                                                                    : 'ghost',
+                                                        },
+                                                    )}`}
+                                                    href={href}
+                                                    rel="noreferrer noopener"
+                                                    onClick={() =>
+                                                        setIsOpen(false)
+                                                    }
+                                                >
+                                                    {label}
+                                                </Link>
+                                            ),
+                                        )}
+                                        <Link
+                                            className={`mt-10 w-full border ${faqButtonClasses(pathname)}`}
+                                            href="/faq"
+                                            onClick={() => setIsOpen(false)}
                                         >
-                                            <FlaskConical className="mr-2 h-5 w-5" />
-                                            inf-lab.dev
-                                        </a>
+                                            <CircleHelp className="mr-2 h-5 w-5" />
+                                            FAQ
+                                        </Link>
                                     </nav>
                                 </SheetContent>
                             </Sheet>
                         </div>
 
                         {/* desktop */}
-                        <nav className="hidden gap-2 md:flex">
-                            {routeList.map(({ href, label }, i) => (
+                        <nav className="hidden gap-2 lg:flex">
+                            {routeList.map(({ href, label, children }, i) => (
                                 <Link
-                                    rel="noreferrer noopener"
-                                    href={href}
                                     key={i}
                                     className={`text-[17px] ${buttonVariants({
-                                        variant: pathname.startsWith(href)
+                                        variant: children.includes(pathname)
                                             ? 'default'
                                             : 'ghost',
                                     })}`}
+                                    href={href}
+                                    rel="noreferrer noopener"
                                 >
                                     {label}
                                 </Link>
                             ))}
                         </nav>
 
-                        <div className="hidden gap-2 md:flex">
-                            <a
-                                rel="noreferrer noopener"
-                                href="https://inf-lab.dev"
-                                target="_blank"
-                                className={`border ${buttonVariants({ variant: 'secondary' })}`}
+                        <div className="hidden gap-2 lg:flex">
+                            <Link
+                                className={`border ${faqButtonClasses(pathname)}`}
+                                href="/faq"
                             >
-                                <FlaskConical className="mr-2 h-5 w-5" />
-                                inf-lab.dev
-                            </a>
+                                <CircleHelp className="mr-2 h-5 w-5" />
+                                FAQ
+                            </Link>
 
                             <ModeToggle />
                         </div>

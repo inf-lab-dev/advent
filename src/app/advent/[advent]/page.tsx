@@ -1,39 +1,32 @@
-import Page, { extractTask, Params } from '@/components/page/advent/page';
+import Page from '@/components/page/advent/page';
 import SolutionNote from '@/components/page/advent/solution-note';
-import { fromLiteral, toLiteral } from '@/lib/advent';
-import { fetchAdventData } from '@/lib/advent/loader';
+import {
+    extractTask,
+    generateAdventMetadata,
+    generateStaticAdventParams,
+    PageProps,
+} from '@/lib/advent/util/next';
 import { Metadata } from 'next';
 
-export interface Props {
-    params: Promise<Params>;
-}
-
-export async function generateMetadata({ params }: Props): Promise<Metadata> {
-    const { advent } = await params;
-    const sunday = fromLiteral(advent)!;
-
-    return {
-        title: `${sunday}. Advent`,
-    };
+export async function generateMetadata(props: PageProps): Promise<Metadata> {
+    return await generateAdventMetadata(props);
 }
 
 export async function generateStaticParams() {
-    const [, tasks] = await fetchAdventData();
-
-    return tasks.sundays.map((sunday) => ({
-        advent: toLiteral(sunday),
-    }));
+    return await generateStaticAdventParams(false);
 }
 
-export default async function TaskDescription({ params }: Props) {
-    const [advent, task] = await extractTask(params);
+export default async function TaskDescription({ params }: PageProps) {
+    const task = await extractTask(params);
 
     return (
-        <Page task={task} content={task.content}>
-            <SolutionNote
-                advent={advent}
-                decrypted={task.manifest.is_solution_public}
-            />
+        <Page content={task.files.content} task={task}>
+            {task.files.solution && (
+                <SolutionNote
+                    decrypted={task.manifest.is_solution_public}
+                    slug={task.slug}
+                />
+            )}
         </Page>
     );
 }

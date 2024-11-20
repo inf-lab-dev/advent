@@ -3,18 +3,17 @@
 import { Alert, AlertDescription, AlertTitle } from '@/components/ui/alert';
 import { Button, buttonVariants } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
-import { Advent } from '@/lib/advent';
 import { CheckCircle, Lock } from 'lucide-react';
 import Form from 'next/form';
 import Link from 'next/link';
 import { useState } from 'react';
 
 export interface Props {
-    advent: Advent;
+    slug: string;
     decrypted: boolean;
 }
 
-function Decrypted({ advent }: Props) {
+function Decrypted({ slug }: Props) {
     return (
         <>
             <p>Die Lösungen für diese Aufgabe wurden bereits veröffentlicht.</p>
@@ -22,7 +21,7 @@ function Decrypted({ advent }: Props) {
                 className={buttonVariants({
                     variant: 'outline',
                 })}
-                href={`/advent/${advent}/solution`}
+                href={`/advent/${slug}/solution`}
             >
                 Lösung anzeigen
             </Link>
@@ -30,7 +29,7 @@ function Decrypted({ advent }: Props) {
     );
 }
 
-function Encrypted({ advent }: Props) {
+function Encrypted({ slug }: Props) {
     const [touched, setTouched] = useState(false);
     const [password, setPassword] = useState('');
 
@@ -49,24 +48,24 @@ function Encrypted({ advent }: Props) {
                 hier eingeben.
             </p>
             <Form
+                action={`/advent/${slug}/solution`}
                 className="flex w-full flex-col items-center gap-3 md:flex-row"
-                action={`/advent/${advent}/solution`}
                 onSubmit={onSubmit}
             >
                 <Input
                     className={`w-full flex-grow ${isInvalid && touched ? 'border-red-500 focus-visible:ring-red-800' : ''}`}
                     name="key"
-                    type="text"
                     placeholder="Passwort"
+                    type="text"
                     value={password}
                     onChange={(event) => setPassword(event.target.value)}
                     onFocus={() => setTouched(true)}
                 />
                 <Button
                     className="w-full md:w-min"
-                    variant="outline"
-                    type="submit"
                     disabled={isInvalid}
+                    type="submit"
+                    variant="outline"
                 >
                     Lösung anzeigen
                 </Button>
@@ -75,7 +74,7 @@ function Encrypted({ advent }: Props) {
     );
 }
 
-export default function SolutionNote({ advent, decrypted }: Props) {
+export default function SolutionNote({ slug, decrypted }: Props) {
     return (
         <Alert>
             {decrypted ? (
@@ -89,9 +88,9 @@ export default function SolutionNote({ advent, decrypted }: Props) {
             <AlertDescription>
                 <div className="flex flex-col gap-3">
                     {decrypted ? (
-                        <Decrypted advent={advent} decrypted={decrypted} />
+                        <Decrypted decrypted={decrypted} slug={slug} />
                     ) : (
-                        <Encrypted advent={advent} decrypted={decrypted} />
+                        <Encrypted decrypted={decrypted} slug={slug} />
                     )}
                 </div>
             </AlertDescription>

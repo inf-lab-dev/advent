@@ -1,15 +1,22 @@
 import fs from 'node:fs/promises';
-import { AdventSunday } from '..';
+import { z } from 'zod';
 
-export interface Manifest {
-    advent: AdventSunday;
-    title: string;
-    is_solution_public: boolean;
-    files: {
-        content: string;
-        solution: string;
-    };
-}
+export type Manifest = z.infer<typeof SCHEMA>;
+
+const SCHEMA = z.object({
+    title: z.string().trim().min(1),
+    candles: z.number().int().min(0).max(4),
+    is_draft: z.boolean(),
+    is_solution_public: z.boolean(),
+    navigation: z.object({
+        weight: z.number().int().positive(),
+        title: z.string().trim().min(1),
+    }),
+    files: z.object({
+        content: z.string().trim().min(1),
+        solution: z.string().trim().min(1).optional(),
+    }),
+});
 
 export const FILE_NAME = 'manifest.json';
 
@@ -17,36 +24,13 @@ export async function loadManifest(filePath: string): Promise<Manifest> {
     const manifestContent = await fs.readFile(filePath, { encoding: 'utf8' });
     const manifest = JSON.parse(manifestContent);
 
-    if (
-        !manifest.advent ||
-        isNaN(manifest.advent) ||
-        manifest.advent > 4 ||
-        manifest.advent < 1
-    ) {
-        throw new TypeError(
-            `The manifest at "${filePath}" is malformed, expected "advent" to be a valid advent in the range [1, 4].`,
-        );
-    } else if (!manifest.title) {
-        throw new TypeError(
-            `The manifest at "${filePath}" is malformed, expected "title" to be a non-empty string.`,
-        );
-    } else if (typeof manifest.is_solution_public !== 'boolean') {
-        throw new TypeError(
-            `The manifest at "${filePath}" is malformed, expected "is_solution_public" to be a boolean.`,
-        );
-    } else if (!manifest.files) {
-        throw new TypeError(
-            `The manifest at "${filePath}" is malformed, expected "files" to be an object.`,
-        );
-    } else if (!manifest.files.content) {
-        throw new TypeError(
-            `The manifest at "${filePath}" is malformed, expected "files.content" to be a non-empty path.`,
-        );
-    } else if (!manifest.files.solution) {
-        throw new TypeError(
-            `The manifest at "${filePath}" is malformed, expected "files.solution" to be a non-empty path.`,
-        );
+    const { success, data, error } = SCHEMA.safeParse(manifest);
+
+    if (!success) {
+        throw new TypeError(`The manifest at "${filePath}" is malformed.`, {
+            cause: error.format(),
+        });
     }
 
-    return manifest;
+    return data;
 }

@@ -10,7 +10,7 @@ export interface Props {
 
 export default function GlobalError({ error, reset }: Props) {
     return (
-        <ErrorPage icon="tree" code={500} text={error.message}>
+        <ErrorPage code="500" icon="tree" text={error.message}>
             <Button onClick={reset}>Erneut versuchen</Button>
         </ErrorPage>
     );
