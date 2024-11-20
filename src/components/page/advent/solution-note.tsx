@@ -44,9 +44,9 @@ function Encrypted({ advent }: Props) {
     return (
         <>
             <p>
-                Um die Lösung für diese Aufgabe anzuzeigen, musst du zuerst die
-                Aufgabe lösen und dann das in der Aufgabenstellung beschriebene
-                Passwort unten eingeben.
+                Um die Lösung für diese Aufgabe anzuzeigen, musst du sie zuerst
+                lösen und dann das in der Aufgabenstellung beschriebene Passwort
+                hier eingeben.
             </p>
             <Form
                 className="flex w-full flex-col items-center gap-3 md:flex-row"
