@@ -5,7 +5,7 @@ import { Task, Tasks } from '..';
 import { FILE_NAME, loadManifest } from './manifest';
 import { loadMarkdown } from './markdown';
 
-const TASKS_FOLDER = './tasks';
+const TASKS_FOLDER = './content/tasks';
 
 async function loadTasks(): Promise<Tasks> {
     const taskDirectories = await fs.readdir(TASKS_FOLDER, {
