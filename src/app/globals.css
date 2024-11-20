@@ -1,3 +1,5 @@
+@import 'highlight.js/styles/github-dark.css';
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
@@ -65,10 +67,14 @@
     }
 
     html {
-        @apply scroll-smooth;
+        @apply overflow-y-scroll scroll-smooth;
     }
 
     body {
-        @apply bg-background text-foreground;
+        @apply flex min-h-screen flex-col bg-background text-foreground;
+    }
+
+    html body[data-scroll-locked] {
+        margin: 0 !important;
     }
 }

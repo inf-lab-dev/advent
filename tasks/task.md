@@ -16,3 +16,12 @@ with `many` more
 ```
 things!
 ```
+
+```javascript
+function foo() {
+    let x = 5;
+    const a = true;
+
+    console.log('Bar');
+}
+```
