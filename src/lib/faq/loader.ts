@@ -8,6 +8,12 @@ const FAQ_FOLDER = './content/faq';
 const INDEX_FILE = '_index.md';
 const MARKDOWN_TITLE_REGEX = /^# (.+)$/m;
 
+/**
+ * Extracts the very first title element from the given markdown string.
+ *
+ * @param markdown the markdown string to extract from
+ * @returns a tuple consisting of the extracted title and the remaining content
+ */
 function extractTitle(
     markdown: string,
 ): [title: string | null, content: string] {
@@ -23,7 +29,14 @@ function extractTitle(
     return [null, markdown];
 }
 
-async function loadFaqEntries(folderPath: string): Promise<FaqCategory> {
+/**
+ * Loads a single {@link FaqCategory} at the given `folderPath`.
+ *
+ * @param folderPath the path to the folder to load from
+ * @returns the loaded category
+ * @throws {TypeError} if any of the files is malformed, i.e. does not contain a header in-front or if there is no `_index.md` file
+ */
+async function loadFaqCategory(folderPath: string): Promise<FaqCategory> {
     const entryFiles = await fs.readdir(folderPath, { withFileTypes: true });
     const category: Partial<FaqCategory> = { entries: [] };
 
@@ -63,6 +76,12 @@ async function loadFaqEntries(folderPath: string): Promise<FaqCategory> {
     return category as FaqCategory;
 }
 
+/**
+ * Loads all {@link FaqCategory} from the file system.
+ *
+ * @returns the loaded categories
+ * @throws {TypeError} if any of the categories is invalid, see {@link loadFaqCategory}
+ */
 async function loadFaqCategories(): Promise<FaqCategory[]> {
     const categories: FaqCategory[] = [];
     const categoryFolders = await fs.readdir(FAQ_FOLDER, {
@@ -75,11 +94,16 @@ async function loadFaqCategories(): Promise<FaqCategory[]> {
         }
 
         categories.push(
-            await loadFaqEntries(path.join(FAQ_FOLDER, categoryFolder.name)),
+            await loadFaqCategory(path.join(FAQ_FOLDER, categoryFolder.name)),
         );
     }
 
     return categories;
 }
 
+/**
+ * Fetches the faq categories in a cached manner.
+ *
+ * @see {@link loadFaqCategories}
+ */
 export const fetchFaqCategories = cache(loadFaqCategories);

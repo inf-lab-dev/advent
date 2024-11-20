@@ -1,8 +1,14 @@
 import fs from 'node:fs/promises';
 import { z } from 'zod';
 
+/**
+ * The type of manifests.
+ */
 export type Manifest = z.infer<typeof SCHEMA>;
 
+/**
+ * The schema for manifests.
+ */
 const SCHEMA = z.object({
     title: z.string().trim().min(1),
     candles: z.number().int().min(0).max(4),
@@ -18,8 +24,18 @@ const SCHEMA = z.object({
     }),
 });
 
+/**
+ * The fixed file name of the manifest.
+ */
 export const FILE_NAME = 'manifest.json';
 
+/**
+ * Attempts to load a manifest at the given `filePath`.
+ *
+ * @param filePath the path to the manifest file to load
+ * @returns the loaded manifest
+ * @throws {TypeError} if the manifest is malformed
+ */
 export async function loadManifest(filePath: string): Promise<Manifest> {
     const manifestContent = await fs.readFile(filePath, { encoding: 'utf8' });
     const manifest = JSON.parse(manifestContent);
