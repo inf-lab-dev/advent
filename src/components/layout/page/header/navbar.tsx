@@ -54,7 +54,7 @@ export function Navbar({ sundays }: Props) {
             <header className="fixed top-0 z-40 w-full border-b-[1px] bg-white dark:border-b-slate-700 dark:bg-background">
                 <NavigationMenu className="mx-auto">
                     <NavigationMenuList className="container flex h-14 w-screen justify-between px-4">
-                        <NavigationMenuItem className="flex font-bold">
+                        <NavigationMenuItem className="flex font-bold text-primary">
                             <Link
                                 rel="noreferrer noopener"
                                 href="/"
@@ -80,7 +80,7 @@ export function Navbar({ sundays }: Props) {
 
                                 <SheetContent side="right">
                                     <SheetHeader>
-                                        <SheetTitle className="text-xl font-bold">
+                                        <SheetTitle className="text-xl font-bold text-primary">
                                             Inf-Labs im Advent
                                         </SheetTitle>
                                     </SheetHeader>

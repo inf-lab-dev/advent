@@ -40,9 +40,9 @@ export default async function TaskDescription({ params }: Props) {
     return (
         <article className="container">
             <aside className="mb-4 ml-24 md:float-right md:max-w-[40%]">
-                <AdventWreath advent={task.sunday} />
+                <AdventWreath advent={task.manifest.advent} />
             </aside>
-            <h1 className="text-[3.7rem] font-bold">{task.title}</h1>
+            <h1 className="text-[3.7rem] font-bold">{task.manifest.title}</h1>
             <hr className="mb-3 border-t-2 border-muted dark:border-muted-foreground" />
             <div
                 className="prose max-w-none dark:prose-invert"

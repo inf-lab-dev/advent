@@ -1,8 +1,3 @@
----
-advent: 1
-title: Task 1
----
-
 Foo!
 
 # Hello World

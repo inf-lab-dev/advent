@@ -1,8 +1,8 @@
 import { Advent, AdventSunday, fromLiteral } from '.';
+import { Manifest } from './loader/manifest';
 
 export interface Task {
-    sunday: AdventSunday;
-    title: string;
+    manifest: Manifest;
     content: string;
 }
 
@@ -10,7 +10,7 @@ export class Tasks {
     private map = new Map<AdventSunday, Task>();
 
     public constructor(tasks: Task[]) {
-        tasks.forEach((task) => this.map.set(task.sunday, task));
+        tasks.forEach((task) => this.map.set(task.manifest.advent, task));
     }
 
     public get sundays(): AdventSunday[] {
