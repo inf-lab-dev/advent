@@ -1,5 +1,11 @@
 import { Tasks } from '..';
 
+/**
+ * Gets all navigation entries for the tasks.
+ *
+ * @param tasks the tasks to get the navigation for
+ * @returns the navigation entries, sorted in the correct order.
+ */
 export function getNavigationEntries(tasks: Tasks) {
     return Array.from(tasks.values())
         .toSorted(

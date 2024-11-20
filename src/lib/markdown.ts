@@ -2,6 +2,9 @@ import hljs from 'highlight.js';
 import { Marked } from 'marked';
 import { markedHighlight } from 'marked-highlight';
 
+/**
+ * The renderer that's being used when rending markdown.
+ */
 const renderer = new Marked(
     markedHighlight({
         emptyLangClass: 'hljs',
@@ -11,6 +14,12 @@ const renderer = new Marked(
     }),
 );
 
+/**
+ * Renders the given markdown string to html.
+ *
+ * @param markdown the markdown to render
+ * @returns the rendered markdown
+ */
 export function renderMarkdown(markdown: string): string {
     return renderer.parse(markdown, {
         async: false,
