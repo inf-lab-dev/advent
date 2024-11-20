@@ -20,7 +20,7 @@ function Decrypted({ advent }: Props) {
             <p>Die Lösungen für diese Aufgabe wurden bereits veröffentlicht.</p>
             <Link
                 className={buttonVariants({
-                    variant: 'ghost',
+                    variant: 'outline',
                 })}
                 href={`/advent/${advent}/solution`}
             >
@@ -36,6 +36,11 @@ function Encrypted({ advent }: Props) {
 
     const isInvalid = password.trim().length === 0;
 
+    const onSubmit = () => {
+        setPassword('');
+        setTouched(false);
+    };
+
     return (
         <>
             <p>
@@ -46,6 +51,7 @@ function Encrypted({ advent }: Props) {
             <Form
                 className="flex w-full flex-col items-center gap-3 md:flex-row"
                 action={`/advent/${advent}/solution`}
+                onSubmit={onSubmit}
             >
                 <Input
                     className={`w-full flex-grow ${isInvalid && touched ? 'border-red-500 focus-visible:ring-red-800' : ''}`}
@@ -58,7 +64,7 @@ function Encrypted({ advent }: Props) {
                 />
                 <Button
                     className="w-full md:w-min"
-                    variant="secondary"
+                    variant="outline"
                     type="submit"
                     disabled={isInvalid}
                 >

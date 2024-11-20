@@ -4,6 +4,7 @@ import { Manifest } from './loader/manifest';
 export interface Task {
     manifest: Manifest;
     content: string;
+    solution: string;
 }
 
 export class Tasks {
@@ -26,9 +27,7 @@ export class Tasks {
             const sunday = fromLiteral(sundayOrLiteral);
 
             if (sunday === null) {
-                throw new TypeError(
-                    `Cannot convert "${sundayOrLiteral}" back into an advent-sunday.`,
-                );
+                return null;
             }
 
             sundayOrLiteral = sunday;

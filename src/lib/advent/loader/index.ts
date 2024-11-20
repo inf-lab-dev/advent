@@ -4,7 +4,7 @@ import { cache } from 'react';
 import { AdventSunday } from '..';
 import { Task, Tasks } from '../task';
 import { FILE_NAME, loadManifest } from './manifest';
-import { loadContent } from './markdown';
+import { loadMarkdown } from './markdown';
 
 const TASKS_FOLDER = './tasks';
 
@@ -34,13 +34,14 @@ async function loadTasks(): Promise<Tasks> {
             path.join(TASKS_FOLDER, taskFile.name, FILE_NAME),
         );
 
-        const content = await loadContent(
-            path.join(TASKS_FOLDER, taskFile.name, manifest.files.content),
-        );
-
         taskList.push({
             manifest,
-            content,
+            content: await loadMarkdown(
+                path.join(TASKS_FOLDER, taskFile.name, manifest.files.content),
+            ),
+            solution: await loadMarkdown(
+                path.join(TASKS_FOLDER, taskFile.name, manifest.files.solution),
+            ),
         });
     }
 

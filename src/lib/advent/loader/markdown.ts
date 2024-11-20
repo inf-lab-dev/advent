@@ -12,7 +12,7 @@ const renderer = new Marked(
     }),
 );
 
-export async function loadContent(filePath: string): Promise<string> {
+export async function loadMarkdown(filePath: string): Promise<string> {
     const markdown = await fs.readFile(filePath, { encoding: 'utf-8' });
 
     return renderer.parse(markdown, {
