@@ -1,0 +1,5 @@
+# ignore the private key
+private.pem
+
+# but not the public key
+!public.pem

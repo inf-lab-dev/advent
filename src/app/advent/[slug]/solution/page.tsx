@@ -1,8 +1,10 @@
 import ErrorPage from '@/components/layout/error';
 import Page from '@/components/page/advent/page';
 import SolutionNote from '@/components/page/advent/solution-note';
+import TokenGenerator from '@/components/page/advent/token-generator';
 import { buttonVariants } from '@/components/ui/button';
 import { resolveMarkdownContent, Task } from '@/lib/advent';
+import { fetchPublicKey } from '@/lib/advent/token';
 import {
     extractTask,
     generateAdventMetadata,
@@ -48,10 +50,18 @@ async function decryptSolution(
 }
 
 export default async function TaskSolution({ params, searchParams }: Props) {
+    const publicKey = await fetchPublicKey();
     const [task, content] = await decryptSolution(params, searchParams);
 
+    // TODO: use actual password
     return content ? (
         <Page content={content} task={task} titleTemplate="Lösung für „%s“">
+            <TokenGenerator
+                password={'UNKNOWN'}
+                publicKey={publicKey}
+                task={task.slug}
+            />
+
             <Link
                 className={`w-full ${buttonVariants({ variant: 'secondary' })}`}
                 href={`/advent/${task.slug}`}
