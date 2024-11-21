@@ -30,10 +30,7 @@ export default function ErrorPage({ icon, code, text, children }: Props) {
         <div className="flex min-h-[70vh] flex-col items-center justify-center gap-5">
             <div className="flex items-center gap-3 text-[5rem]">
                 <IconComponent className={`${iconClasses} h-[5rem] w-[5rem]`} />
-                <Separator
-                    className="h-[5rem] w-[2px]"
-                    orientation="vertical"
-                />
+                <Separator className="h-[5rem]" orientation="vertical" />
                 <h1 className="font-bold">{code}</h1>
             </div>
             <p className="text-center text-xl">{text}</p>

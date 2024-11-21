@@ -1,4 +1,5 @@
 import AdventWreath from '@/components/advent-wreath';
+import { Separator } from '@/components/ui/separator';
 import { Task } from '@/lib/advent';
 import { PropsWithChildren, useMemo } from 'react';
 
@@ -29,8 +30,10 @@ export default function Page({
                 </div>
             </aside>
             <section>
-                <h1 className="text-[3.7rem] font-bold">{title}</h1>
-                <hr className="mb-3 border-t-2 border-muted dark:border-muted-foreground" />
+                <h1 className="text-[2.5rem] font-bold md:text-[3.7rem]">
+                    {title}
+                </h1>
+                <Separator className="mb-3 md:max-w-[55%]" />
 
                 <div
                     className="prose max-w-none dark:prose-invert"
