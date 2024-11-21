@@ -1,17 +1,19 @@
 'use client';
 
-import { Button } from '@/components/ui/button';
+import { Button, buttonVariants } from '@/components/ui/button';
 import {
-    Card,
-    CardContent,
-    CardDescription,
-    CardFooter,
-    CardHeader,
-    CardTitle,
-} from '@/components/ui/card';
+    Dialog,
+    DialogContent,
+    DialogDescription,
+    DialogFooter,
+    DialogHeader,
+    DialogTitle,
+    DialogTrigger,
+} from '@/components/ui/dialog';
 import { Textarea } from '@/components/ui/textarea';
 import { encryptToken } from '@/lib/advent/token/encryption';
-import { useState } from 'react';
+import { Check, Loader2, TriangleAlert } from 'lucide-react';
+import { useEffect, useState } from 'react';
 
 export interface Props {
     password: string;
@@ -28,65 +30,101 @@ function createToken(task: string, password: string) {
     };
 }
 
-export default function TokenGenerator({ password, task, publicKey }: Props) {
+function TokenField({ password, task, publicKey }: Props) {
     const [token, setToken] = useState<string | null>(null);
-    const [isLoading, setLoading] = useState(false);
+    const [successfulyCopied, setSuccessfullyCopied] = useState<boolean | null>(
+        null,
+    );
 
-    const generateToken = () => {
+    useEffect(() => {
         const token = createToken(task, password);
 
-        setLoading(true);
-
-        encryptToken(token, publicKey).then((encryptedToken) => {
-            setToken(encryptedToken);
-            setLoading(false);
-        });
-    };
+        encryptToken(token, publicKey).then(setToken);
+    }, [password, task, publicKey]);
 
     const copyToClipboard = () => {
         if (!token) {
             throw new TypeError('Cannot copy "NULL" token to clipboard.');
         }
 
-        setLoading(true);
-        navigator.clipboard.writeText(token).then(() => setLoading(false));
+        try {
+            navigator.clipboard.writeText(token);
+
+            setSuccessfullyCopied(true);
+        } catch (error) {
+            if (error instanceof DOMException) {
+                setSuccessfullyCopied(false);
+
+                alert(
+                    'FEHLER: Der Token konnte nicht automatisch kopiert werden. Bitte markierte und kopiere ihn manuell.',
+                );
+            }
+        }
     };
 
     return (
-        <Card>
-            <CardHeader>
-                <CardTitle>Token erstellen</CardTitle>
-                <CardDescription>
-                    Um zu bestätigen, dass du die Aufgabe gelöst hast, kannst du
-                    dir hier einen Token erstellen welchen du deinem Tutor per
-                    E-Mail senden kannst.
-                </CardDescription>
+        <div className="flex min-h-24 flex-col items-center justify-center gap-5">
+            {token ? (
+                <>
+                    <Textarea
+                        className="select-all"
+                        value={token}
+                        readOnly
+                        onClick={(event) =>
+                            (event.target as HTMLTextAreaElement).select()
+                        }
+                    />
+                    <Button
+                        className="w-full"
+                        variant={
+                            successfulyCopied === false
+                                ? 'destructive'
+                                : 'default'
+                        }
+                        onClick={copyToClipboard}
+                    >
+                        {successfulyCopied === true && <Check />}
+                        {successfulyCopied === false && <TriangleAlert />}
+                        In die Zwischenablage kopieren
+                    </Button>
+                </>
+            ) : (
+                <Loader2 className="animate-spin" />
+            )}
+        </div>
+    );
+}
 
-                <CardContent>
-                    {token ? (
-                        <>
-                            <Textarea value={token} readOnly />
-                            <Button
-                                disabled={isLoading}
-                                variant="default"
-                                onClick={copyToClipboard}
-                            >
-                                In die Zwischenablage kopieren
-                            </Button>
-                        </>
-                    ) : (
-                        <Button
-                            disabled={isLoading}
-                            variant="outline"
-                            onClick={generateToken}
-                        >
-                            Neuen Token erstellen
-                        </Button>
-                    )}
-                </CardContent>
+export default function TokenGenerator(props: Props) {
+    return (
+        <Dialog>
+            <DialogTrigger
+                className={`w-full ${buttonVariants({ variant: 'destructive' })}`}
+            >
+                Token erstellen
+            </DialogTrigger>
+            <DialogContent>
+                <DialogHeader>
+                    <DialogTitle>Token erstellen</DialogTitle>
+                    <DialogDescription>
+                        Um zu bestätigen, dass du die Aufgabe gelöst hast,
+                        kannst du dir hier einen Token erstellen welchen du
+                        deinem Tutor per E-Mail senden kannst.
+                    </DialogDescription>
+                </DialogHeader>
 
-                <CardFooter>TODO: some sort of disclaimer...</CardFooter>
-            </CardHeader>
-        </Card>
+                <TokenField {...props} />
+
+                <DialogFooter>
+                    <p>
+                        <strong>Hinweis zum Datenschutz:</strong> Der generierte
+                        Token enthält die aktuelle Uhrzeit, die Aufgabe sowie
+                        das eingegebene Passwort. Er lässt allerdings keine
+                        Rückschlüsse auf dich als Person zu. Dennoch solltest du
+                        ihn nur mit deinem Tutor teilen.
+                    </p>
+                </DialogFooter>
+            </DialogContent>
+        </Dialog>
     );
 }
