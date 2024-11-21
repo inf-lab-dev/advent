@@ -18,9 +18,9 @@ export default function AdventWreath({ candles }: Props) {
     return (
         <div>
             <Image
-                priority
-                src={IMAGES[index]}
                 alt={`Adventskranz mit ${index} brennenden Kerzen`}
+                src={IMAGES[index]}
+                priority
             />
         </div>
     );
