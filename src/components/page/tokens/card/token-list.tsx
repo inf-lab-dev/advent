@@ -67,7 +67,11 @@ export default function TokenList({ tokens }: Props) {
                                 ) => (
                                     <TableRow key={index}>
                                         <TableCell className="font-medium">
-                                            <Link href={`/advent/${task}`}>
+                                            <Link
+                                                className="hover:underline"
+                                                href={`/advent/${task}`}
+                                                target="_blank"
+                                            >
                                                 {task}
                                             </Link>
                                         </TableCell>
