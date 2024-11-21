@@ -2,6 +2,7 @@
     "title": "Aufgabentitel",
     "candles": 1,
     "is_solution_public": false,
+    "supports_hand_in": true,
     "is_draft": false,
     "navigation": {
         "weight": 99,

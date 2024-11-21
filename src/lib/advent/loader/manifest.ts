@@ -14,6 +14,7 @@ const SCHEMA = z.object({
     candles: z.number().int().min(0).max(4),
     is_draft: z.boolean(),
     is_solution_public: z.boolean(),
+    supports_hand_in: z.boolean(),
     navigation: z.object({
         weight: z.number().int().positive(),
         title: z.string().trim().min(1),
