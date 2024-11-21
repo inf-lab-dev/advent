@@ -12,7 +12,7 @@ import { Label } from '@/components/ui/label';
 import { Textarea } from '@/components/ui/textarea';
 import { decryptToken } from '@/lib/advent/token/encryption';
 import { Loader2 } from 'lucide-react';
-import { FormEvent, useId, useState } from 'react';
+import { useId, useState } from 'react';
 import { ImportedToken } from '../cards';
 
 export interface Props {
@@ -25,7 +25,6 @@ export default function ImportToken({ privateKey, onTokenImported }: Props) {
 
     const tokenId = useId();
     const commentId = useId();
-    const formId = useId();
 
     const [isLoading, setLoading] = useState(false);
     const [formError, setFormError] = useState<string | null>(null);
@@ -33,9 +32,7 @@ export default function ImportToken({ privateKey, onTokenImported }: Props) {
     const [token, setToken] = useState('');
     const [comment, setComment] = useState('');
 
-    const onFormSubmit = (event: FormEvent<HTMLFormElement>) => {
-        event.preventDefault();
-
+    const submitForm = () => {
         if (token.length === 0) {
             return;
         }
@@ -72,11 +69,7 @@ export default function ImportToken({ privateKey, onTokenImported }: Props) {
                 </CardDescription>
             </CardHeader>
             <CardContent>
-                <form
-                    className="flex flex-col gap-3"
-                    id={formId}
-                    onSubmit={onFormSubmit}
-                >
+                <div className="flex flex-col gap-3">
                     {formError && (
                         <Alert variant="destructive">
                             <AlertDescription>{formError}</AlertDescription>
@@ -105,12 +98,12 @@ export default function ImportToken({ privateKey, onTokenImported }: Props) {
                             onChange={(event) => setComment(event.target.value)}
                         />
                     </div>
-                </form>
+                </div>
             </CardContent>
             <CardFooter>
                 <Button
                     disabled={token.length === 0 || isLoading}
-                    form={formId}
+                    onClick={submitForm}
                 >
                     {isLoading && <Loader2 className="animate-spin" />}
                     Importieren
