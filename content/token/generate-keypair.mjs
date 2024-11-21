@@ -1,15 +1,14 @@
 import crypto from 'node:crypto';
 import fs from 'node:fs';
 
-// Generate RSA Key Pair
 const { publicKey, privateKey } = crypto.generateKeyPairSync('rsa', {
-    modulusLength: 2048, // Key size in bits
+    modulusLength: 2048,
     publicKeyEncoding: {
-        type: 'spki', // Standard format for public keys
+        type: 'spki',
         format: 'pem',
     },
     privateKeyEncoding: {
-        type: 'pkcs8', // Standard format for private keys
+        type: 'pkcs8',
         format: 'pem',
     },
 });

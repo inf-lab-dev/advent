@@ -22,6 +22,12 @@ interface Props extends PageProps {
     searchParams: Promise<SearchParams>;
 }
 
+export interface DecryptedSolution {
+    key: string | null;
+    task: Task;
+    content: string | null;
+}
+
 export async function generateMetadata(props: PageProps): Promise<Metadata> {
     return await generateAdventMetadata(props, 'Lösung für %s');
 }
@@ -33,9 +39,10 @@ export async function generateStaticParams() {
 async function decryptSolution(
     params: Promise<UrlParams>,
     searchParams: Promise<SearchParams>,
-): Promise<[task: Task, content: string | null]> {
+): Promise<DecryptedSolution> {
     const task = await extractTask(params);
     const { key } = await searchParams;
+    const secureKey = typeof key !== 'string' ? undefined : key;
 
     if (task.files.solution === null) {
         notFound();
@@ -43,31 +50,34 @@ async function decryptSolution(
 
     const content = await resolveMarkdownContent(
         task.files.solution,
-        typeof key !== 'string' ? undefined : key,
+        secureKey,
     );
 
-    return [task, content];
+    return { key: secureKey ?? null, content, task };
 }
 
 export default async function TaskSolution({ params, searchParams }: Props) {
     const publicKey = await fetchPublicKey();
-    const [task, content] = await decryptSolution(params, searchParams);
+    const { key, task, content } = await decryptSolution(params, searchParams);
 
-    // TODO: use actual password
     return content ? (
         <Page content={content} task={task} titleTemplate="Lösung für „%s“">
-            <TokenGenerator
-                password={'UNKNOWN'}
-                publicKey={publicKey}
-                task={task.slug}
-            />
+            <div className="flex flex-col gap-2">
+                {task.manifest.supports_hand_in && (
+                    <TokenGenerator
+                        password={key ?? 'NOT_SPECIFIED'}
+                        publicKey={publicKey}
+                        task={task.slug}
+                    />
+                )}
 
-            <Link
-                className={`w-full ${buttonVariants({ variant: 'secondary' })}`}
-                href={`/advent/${task.slug}`}
-            >
-                Zurück zur Aufgabenstellung
-            </Link>
+                <Link
+                    className={`w-full ${buttonVariants({ variant: 'secondary' })}`}
+                    href={`/advent/${task.slug}`}
+                >
+                    Zurück zur Aufgabenstellung
+                </Link>
+            </div>
         </Page>
     ) : (
         <ErrorPage

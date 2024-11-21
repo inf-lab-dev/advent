@@ -99,7 +99,7 @@ export default function TokenGenerator(props: Props) {
     return (
         <Dialog>
             <DialogTrigger
-                className={`w-full ${buttonVariants({ variant: 'destructive' })}`}
+                className={`w-full ${buttonVariants({ variant: 'default' })}`}
             >
                 Token erstellen
             </DialogTrigger>
