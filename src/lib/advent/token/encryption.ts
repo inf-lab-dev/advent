@@ -119,7 +119,10 @@ async function decryptUsingAes(
     );
 }
 
-export async function encryptToken(token: Token, publicKeyPem: string) {
+export async function encryptToken(
+    token: Token,
+    publicKeyPem: string,
+): Promise<string> {
     const publicKey = await importPublicKey(publicKeyPem);
 
     const encoder = new TextEncoder();
@@ -145,7 +148,7 @@ export async function encryptToken(token: Token, publicKeyPem: string) {
 export async function decryptToken(
     encryptedToken: string,
     privateKeyPem: string,
-) {
+): Promise<Token> {
     const decoder = new TextDecoder();
     const privateKey = await importPrivateKey(privateKeyPem);
     const { payload, aesKey, iv } = JSON.parse(atob(encryptedToken));
