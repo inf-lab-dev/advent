@@ -28,38 +28,45 @@ export default async function Faq() {
             <div className="grid grid-cols-1 gap-5 lg:grid-cols-2">
                 {categories.map(
                     ({ title, description, entries }, categoryIndex) => (
-                        <Card key={categoryIndex}>
-                            <CardHeader>
-                                <CardTitle className="text-2xl">
-                                    {title}
-                                </CardTitle>
-                                <CardDescription>{description}</CardDescription>
-                            </CardHeader>
-                            <CardContent>
-                                <Accordion type="multiple">
-                                    {entries.map(
-                                        ({ question, answer }, entryIndex) => (
-                                            <AccordionItem
-                                                key={entryIndex}
-                                                value={`item-${entryIndex}`}
-                                            >
-                                                <AccordionTrigger className="text-xl">
-                                                    {question}
-                                                </AccordionTrigger>
-                                                <AccordionContent>
-                                                    <div
-                                                        className="prose dark:prose-invert"
-                                                        dangerouslySetInnerHTML={{
-                                                            __html: answer,
-                                                        }}
-                                                    />
-                                                </AccordionContent>
-                                            </AccordionItem>
-                                        ),
-                                    )}
-                                </Accordion>
-                            </CardContent>
-                        </Card>
+                        <section key={categoryIndex}>
+                            <Card>
+                                <CardHeader>
+                                    <CardTitle className="text-2xl">
+                                        {title}
+                                    </CardTitle>
+                                    <CardDescription>
+                                        {description}
+                                    </CardDescription>
+                                </CardHeader>
+                                <CardContent>
+                                    <Accordion type="multiple">
+                                        {entries.map(
+                                            (
+                                                { question, answer },
+                                                entryIndex,
+                                            ) => (
+                                                <AccordionItem
+                                                    key={entryIndex}
+                                                    value={`item-${entryIndex}`}
+                                                >
+                                                    <AccordionTrigger className="text-xl">
+                                                        {question}
+                                                    </AccordionTrigger>
+                                                    <AccordionContent>
+                                                        <div
+                                                            className="prose dark:prose-invert"
+                                                            dangerouslySetInnerHTML={{
+                                                                __html: answer,
+                                                            }}
+                                                        />
+                                                    </AccordionContent>
+                                                </AccordionItem>
+                                            ),
+                                        )}
+                                    </Accordion>
+                                </CardContent>
+                            </Card>
+                        </section>
                     ),
                 )}
             </div>
