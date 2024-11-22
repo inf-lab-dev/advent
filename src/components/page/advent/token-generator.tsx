@@ -1,6 +1,7 @@
 'use client';
 
 import { Button, buttonVariants } from '@/components/ui/button';
+import { Checkbox } from '@/components/ui/checkbox';
 import {
     Dialog,
     DialogContent,
@@ -10,10 +11,12 @@ import {
     DialogTitle,
     DialogTrigger,
 } from '@/components/ui/dialog';
+import { Separator } from '@/components/ui/separator';
 import { Textarea } from '@/components/ui/textarea';
+import { Token } from '@/lib/advent/token';
 import { encryptToken } from '@/lib/advent/token/encryption';
 import { Check, Loader2, TriangleAlert } from 'lucide-react';
-import { useEffect, useState } from 'react';
+import { useEffect, useId, useState } from 'react';
 
 export interface Props {
     password: string;
@@ -21,26 +24,80 @@ export interface Props {
     publicKey: string;
 }
 
-function createToken(task: string, password: string) {
+function createToken(
+    task: string,
+    password: string,
+    understoodRelevance: boolean,
+): Token {
+    if (!understoodRelevance) {
+        throw new TypeError(
+            'Cannot create a token if the user did not understand the relevance of the labs.',
+        );
+    }
+
     return {
         task,
         at: Date.now(),
         id: crypto.randomUUID(),
         password,
+        understood_relevance: understoodRelevance,
     };
 }
 
-function TokenField({ password, task, publicKey }: Props) {
+function UnderstoodRelevanceCheckbox({
+    understood,
+    onUnderstoodChanged,
+}: {
+    understood: boolean;
+    onUnderstoodChanged: (newUnderstood: boolean) => void;
+}) {
+    const id = useId();
+
+    return (
+        <div className="items-top flex space-x-2">
+            <Checkbox
+                checked={understood}
+                id={id}
+                onCheckedChange={onUnderstoodChanged}
+            />
+            <div className="grid gap-1.5 leading-none">
+                <label
+                    className={`${!understood ? 'text-red-700' : ''} text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70`}
+                    htmlFor={id}
+                >
+                    Ich habe verstanden, dass die Inf-Labs kein offizieller
+                    Bestandteil der Inf-Einf-B Veranstaltung sind.
+                </label>
+                {!understood && (
+                    <p className="text-sm leading-[1rem] text-muted-foreground">
+                        Wenn du hier bestätigst, erklärst du auch, dass du
+                        verstanden hast, dass die Übungen auf <em>inf.zone</em>
+                        &nbsp;Vorrang haben sollten und dass du am Advent of
+                        Inf-Labs nur teilnehmen solltest, wenn du zusätzliche
+                        Übungen machen möchtest.
+                    </p>
+                )}
+            </div>
+        </div>
+    );
+}
+
+function TokenField({
+    password,
+    task,
+    publicKey,
+    understoodRelevance,
+}: Props & { understoodRelevance: boolean }) {
     const [token, setToken] = useState<string | null>(null);
     const [successfulyCopied, setSuccessfullyCopied] = useState<boolean | null>(
         null,
     );
 
     useEffect(() => {
-        const token = createToken(task, password);
+        const token = createToken(task, password, understoodRelevance);
 
         encryptToken(token, publicKey).then(setToken);
-    }, [password, task, publicKey]);
+    }, [password, task, publicKey, understoodRelevance]);
 
     const copyToClipboard = () => {
         if (!token) {
@@ -85,7 +142,7 @@ function TokenField({ password, task, publicKey }: Props) {
                     >
                         {successfulyCopied === true && <Check />}
                         {successfulyCopied === false && <TriangleAlert />}
-                        In die Zwischenablage kopieren
+                        Token in die Zwischenablage kopieren
                     </Button>
                 </>
             ) : (
@@ -96,6 +153,8 @@ function TokenField({ password, task, publicKey }: Props) {
 }
 
 export default function TokenGenerator(props: Props) {
+    const [understoodRelevance, setUnderstoodRelevance] = useState(false);
+
     return (
         <Dialog>
             <DialogTrigger
@@ -113,17 +172,32 @@ export default function TokenGenerator(props: Props) {
                     </DialogDescription>
                 </DialogHeader>
 
-                <TokenField {...props} />
+                <UnderstoodRelevanceCheckbox
+                    understood={understoodRelevance}
+                    onUnderstoodChanged={setUnderstoodRelevance}
+                />
 
-                <DialogFooter>
-                    <p>
-                        <strong>Hinweis zum Datenschutz:</strong> Der generierte
-                        Token enthält die aktuelle Uhrzeit, die Aufgabe sowie
-                        das eingegebene Passwort. Er lässt allerdings keine
-                        Rückschlüsse auf dich als Person zu. Dennoch solltest du
-                        ihn nur mit deinem Tutor teilen.
-                    </p>
-                </DialogFooter>
+                {understoodRelevance && (
+                    <>
+                        <Separator />
+                        <TokenField
+                            {...props}
+                            understoodRelevance={understoodRelevance}
+                        />
+
+                        <DialogFooter>
+                            <p>
+                                <strong>Hinweis zum Datenschutz:</strong> Der
+                                generierte Token enthält deine obige
+                                Bestätigung, die aktuelle Uhrzeit, die Aufgabe
+                                sowie das eingegebene Passwort. Er lässt
+                                allerdings keine Rückschlüsse auf dich als
+                                Person zu. Dennoch solltest du ihn nur mit
+                                deinem Tutor per E-Mail teilen.
+                            </p>
+                        </DialogFooter>
+                    </>
+                )}
             </DialogContent>
         </Dialog>
     );

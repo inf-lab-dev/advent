@@ -40,6 +40,12 @@ export default function ImportToken({ privateKey, onTokenImported }: Props) {
         setLoading(true);
         decryptToken(token, privateKey)
             .then((tokenValue) => {
+                if (!tokenValue.understood_relevance) {
+                    throw new TypeError(
+                        'Cannot use a token who did not confirm that the relevance of this material is known. The token was probably maliciously modified.',
+                    );
+                }
+
                 setLoading(false);
                 setFormError(null);
 
