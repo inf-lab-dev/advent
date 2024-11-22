@@ -70,11 +70,13 @@ function UnderstoodRelevanceCheckbox({
                 </label>
                 {!understood && (
                     <p className="text-sm leading-[1rem] text-muted-foreground">
-                        Wenn du hier bestätigst, erklärst du auch, dass du
-                        verstanden hast, dass die Übungen auf <em>inf.zone</em>
-                        &nbsp;Vorrang haben sollten und dass du am Advent of
-                        Inf-Labs nur teilnehmen solltest, wenn du zusätzliche
-                        Übungen machen möchtest.
+                        Ich bestätige, dass ich verstanden habe, dass die
+                        Inf-Labs kein offizieller Bestandteil der Veranstaltung
+                        Inf-Einf-B sind. Außerdem erkläre ich, dass mir bewusst
+                        ist, dass die Übungen auf <em>inf.zone</em> Vorrang
+                        haben und dass ich am Advent of Inf-Labs nur teilnehme,
+                        um mein Wissen durch&nbsp;
+                        <strong>zusätzliche Übungen</strong> zu vertiefen.
                     </p>
                 )}
             </div>
