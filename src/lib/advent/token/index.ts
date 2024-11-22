@@ -6,6 +6,7 @@ export interface Token {
     at: number;
     password: string;
     id: string;
+    understood_relevance: boolean;
 }
 
 async function loadPublicKey() {

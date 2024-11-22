@@ -19,7 +19,10 @@ export default async function Tokens() {
                     Tokens gedacht und ist ohne den korrekten privaten Schlüssel
                     Funktionslos. Solltest du versehentlich auf dieser Seite
                     gelandet sein, kommst du&nbsp;
-                    <Link href="/">hier zur Startseite</Link>.
+                    <Link className="hover:underline" href="/">
+                        hier zur Startseite
+                    </Link>
+                    .
                 </AlertDescription>
             </Alert>
 
