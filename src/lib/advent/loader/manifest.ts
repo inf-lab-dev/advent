@@ -13,7 +13,7 @@ const SCHEMA = z.object({
     title: z.string().trim().min(1),
     candles: z.number().int().min(0).max(4),
     is_draft: z.boolean(),
-    is_solution_public: z.boolean(),
+    is_epilogue_public: z.boolean(),
     supports_hand_in: z.boolean(),
     navigation: z.object({
         weight: z.number().int().positive(),
@@ -21,7 +21,7 @@ const SCHEMA = z.object({
     }),
     files: z.object({
         content: z.string().trim().min(1),
-        solution: z.string().trim().min(1).optional(),
+        epilogue: z.string().trim().min(1).optional(),
     }),
 });
 

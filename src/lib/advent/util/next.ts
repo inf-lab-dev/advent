@@ -26,14 +26,14 @@ export interface PageProps {
 /**
  * Generates the static page-params so NextJs can pre-render all task pages.
  *
- * @param requireSolution if only tasks with solutions should be respected
+ * @param requireEpilogue if only tasks with epilogues should be respected
  * @returns all {@link UrlParams}s needed to pre-render the pages
  */
-export async function generateStaticAdventParams(requireSolution: boolean) {
+export async function generateStaticAdventParams(requireEpilogue: boolean) {
     const tasks = await fetchAdventTasks();
 
     return Array.from(tasks.values())
-        .filter(({ files }) => files.solution || !requireSolution)
+        .filter(({ files }) => files.epilogue || !requireEpilogue)
         .map(({ slug }) => ({ slug }));
 }
 

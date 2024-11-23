@@ -1,4 +1,4 @@
-import Renderer from '@/components/page/advent/solution/renderer';
+import Renderer from '@/components/page/advent/epilogue/renderer';
 import { fetchPublicKey } from '@/lib/advent/token';
 import {
     extractTask,
@@ -16,14 +16,14 @@ interface Props extends PageProps {
 }
 
 export async function generateMetadata(props: PageProps): Promise<Metadata> {
-    return await generateAdventMetadata(props, 'Lösung für %s');
+    return await generateAdventMetadata(props, 'Epilog für %s');
 }
 
 export async function generateStaticParams() {
     return await generateStaticAdventParams(true);
 }
 
-export default async function TaskSolution({ params }: Props) {
+export default async function TaskEpilogue({ params }: Props) {
     const publicKey = await fetchPublicKey();
     const task = await extractTask(params);
 

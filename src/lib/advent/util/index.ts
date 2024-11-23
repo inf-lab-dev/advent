@@ -24,7 +24,7 @@ export function getNavigationEntries(tasks: Tasks) {
                 label: title,
                 children: [
                     `/advent/${slug}`,
-                    ...(files.solution ? [`/advent/${slug}/solution`] : []),
+                    ...(files.epilogue ? [`/advent/${slug}/epilogue`] : []),
                 ],
             }),
         );

@@ -11,8 +11,8 @@ import {
     useSearchParams,
 } from 'next/navigation';
 import { useEffect, useState } from 'react';
+import EpilogueNote from '../epilogue-note';
 import Page from '../page';
-import SolutionNote from '../solution-note';
 import TokenGenerator from '../token-generator';
 
 export interface Props {
@@ -20,23 +20,23 @@ export interface Props {
     publicKey: string;
 }
 
-export interface DecryptedSolution {
+export interface DecryptedEpilogue {
     key: string | null;
     task: Task;
     content: string | null;
 }
 
-async function decryptSolution(
+async function decryptEpilogue(
     task: Task,
     searchParams: ReadonlyURLSearchParams,
-): Promise<DecryptedSolution> {
+): Promise<DecryptedEpilogue> {
     const key = searchParams.get('key') ?? undefined;
 
-    if (task.files.solution === null) {
+    if (task.files.epilogue === null) {
         notFound();
     }
 
-    const content = await resolveMarkdownContent(task.files.solution, key);
+    const content = await resolveMarkdownContent(task.files.epilogue, key);
 
     return { key: key ?? null, content, task };
 }
@@ -49,7 +49,7 @@ function WrongPassword({ task }: { task: Task }) {
             text="Das eingegebene Passwort ist leider falsch."
         >
             <div className="flex flex-col gap-5 lg:w-1/2">
-                <SolutionNote decrypted={false} slug={task.slug} />
+                <EpilogueNote decrypted={false} slug={task.slug} />
 
                 <Link
                     className={buttonVariants({ variant: 'outline' })}
@@ -67,7 +67,7 @@ function Loader() {
         <div className="flex min-h-[70vh] flex-col items-center justify-center p-4 text-2xl text-primary">
             <div className="items-middle flex items-center gap-2">
                 <Loader2 className="h-12 w-12 animate-spin" />
-                <span>Lösung entschlüsseln...</span>
+                <span>Epilog entschlüsseln...</span>
             </div>
         </div>
     );
@@ -75,41 +75,41 @@ function Loader() {
 
 export default function Renderer({ task, publicKey }: Props) {
     const searchParams = useSearchParams();
-    const [decryptedSolution, setDecryptedSolution] =
-        useState<DecryptedSolution | null>(null);
+    const [decryptedEpilogue, setDecryptedEpilogue] =
+        useState<DecryptedEpilogue | null>(null);
 
     useEffect(
         () =>
-            void decryptSolution(task, searchParams).then(setDecryptedSolution),
+            void decryptEpilogue(task, searchParams).then(setDecryptedEpilogue),
         [task, searchParams],
     );
 
-    return decryptedSolution ? (
-        decryptedSolution.content ? (
+    return decryptedEpilogue ? (
+        decryptedEpilogue.content ? (
             <Page
-                content={decryptedSolution.content}
-                task={decryptedSolution.task}
-                titleTemplate="Lösung für „%s“"
+                content={decryptedEpilogue.content}
+                task={decryptedEpilogue.task}
+                titleTemplate="Epilog für „%s“"
             >
                 <div className="flex flex-col gap-2">
-                    {decryptedSolution.task.manifest.supports_hand_in && (
+                    {decryptedEpilogue.task.manifest.supports_hand_in && (
                         <TokenGenerator
-                            password={decryptedSolution.key ?? 'NOT_SPECIFIED'}
+                            password={decryptedEpilogue.key ?? 'NOT_SPECIFIED'}
                             publicKey={publicKey}
-                            task={decryptedSolution.task.slug}
+                            task={decryptedEpilogue.task.slug}
                         />
                     )}
 
                     <Link
                         className={`w-full ${buttonVariants({ variant: 'secondary' })}`}
-                        href={`/advent/${decryptedSolution.task.slug}`}
+                        href={`/advent/${decryptedEpilogue.task.slug}`}
                     >
                         Zurück zur Aufgabenstellung
                     </Link>
                 </div>
             </Page>
         ) : (
-            <WrongPassword task={decryptedSolution.task} />
+            <WrongPassword task={decryptedEpilogue.task} />
         )
     ) : (
         <Loader />
