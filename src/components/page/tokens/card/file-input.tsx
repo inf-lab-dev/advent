@@ -48,7 +48,7 @@ export default function FileInput({ onKeyLoaded }: Props) {
                 <CardDescription>
                     Wähle hier die <em>pem-Datei</em> des privaten Schlüssel
                     aus. Beachte bitte, dass keine Validierung dieses Schlüssels
-                    erfolgt und daher ein fehlerhafter Schlüssel zu Fehlern
+                    erfolgt und daher ein fehlerhafter Schlüssel zu Problemen
                     führen wird.
                 </CardDescription>
             </CardHeader>

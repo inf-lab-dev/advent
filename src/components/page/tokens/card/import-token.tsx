@@ -8,11 +8,12 @@ import {
     CardHeader,
     CardTitle,
 } from '@/components/ui/card';
+import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
 import { Textarea } from '@/components/ui/textarea';
 import { decryptToken } from '@/lib/advent/token/encryption';
 import { Loader2 } from 'lucide-react';
-import { useId, useState } from 'react';
+import { FormEvent, useId, useMemo, useState } from 'react';
 import { ImportedToken } from '../cards';
 
 export interface Props {
@@ -23,17 +24,31 @@ export interface Props {
 export default function ImportToken({ privateKey, onTokenImported }: Props) {
     'use client';
 
+    const formId = useId();
+    const emailId = useId();
     const tokenId = useId();
     const commentId = useId();
 
     const [isLoading, setLoading] = useState(false);
     const [formError, setFormError] = useState<string | null>(null);
 
+    const [email, setEmail] = useState('');
     const [token, setToken] = useState('');
     const [comment, setComment] = useState('');
 
-    const submitForm = () => {
-        if (token.length === 0) {
+    const isEmailInvalid = useMemo(
+        () =>
+            email.length === 0 ||
+            !/^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/.test(
+                email,
+            ),
+        [email],
+    );
+
+    const submitForm = (event: FormEvent<HTMLFormElement>) => {
+        event.preventDefault();
+
+        if (token.length === 0 || isEmailInvalid) {
             return;
         }
 
@@ -49,11 +64,14 @@ export default function ImportToken({ privateKey, onTokenImported }: Props) {
                 setLoading(false);
                 setFormError(null);
 
+                setEmail('');
                 setToken('');
                 setComment('');
 
                 onTokenImported({
                     token: tokenValue,
+                    rawToken: token,
+                    email,
                     comment,
                 });
             })
@@ -75,12 +93,32 @@ export default function ImportToken({ privateKey, onTokenImported }: Props) {
                 </CardDescription>
             </CardHeader>
             <CardContent>
-                <div className="flex flex-col gap-3">
+                <form
+                    className="flex flex-col gap-3"
+                    id={formId}
+                    onSubmit={submitForm}
+                >
                     {formError && (
                         <Alert variant="destructive">
                             <AlertDescription>{formError}</AlertDescription>
                         </Alert>
                     )}
+                    <div className="grid w-full gap-1.5">
+                        <Label
+                            className={`${isEmailInvalid && 'text-destructive'}`}
+                            htmlFor={emailId}
+                        >
+                            E-Mail des Einsenders
+                        </Label>
+                        <Input
+                            id={emailId}
+                            type="email"
+                            value={email}
+                            onChange={(event) =>
+                                setEmail(event.target.value.trim())
+                            }
+                        />
+                    </div>
                     <div className="grid w-full gap-1.5">
                         <Label
                             className={`${token.length === 0 && 'text-destructive'}`}
@@ -104,12 +142,13 @@ export default function ImportToken({ privateKey, onTokenImported }: Props) {
                             onChange={(event) => setComment(event.target.value)}
                         />
                     </div>
-                </div>
+                </form>
             </CardContent>
             <CardFooter>
                 <Button
-                    disabled={token.length === 0 || isLoading}
-                    onClick={submitForm}
+                    disabled={token.length === 0 || isEmailInvalid || isLoading}
+                    form={formId}
+                    type="submit"
                 >
                     {isLoading && <Loader2 className="animate-spin" />}
                     Importieren
