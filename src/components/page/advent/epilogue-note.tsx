@@ -16,14 +16,14 @@ export interface Props {
 function Decrypted({ slug }: Props) {
     return (
         <>
-            <p>Die Lösungen für diese Aufgabe wurden bereits veröffentlicht.</p>
+            <p>Der Epilog für diese Aufgabe wurden bereits veröffentlicht.</p>
             <Link
                 className={buttonVariants({
                     variant: 'outline',
                 })}
-                href={`/advent/${slug}/solution`}
+                href={`/advent/${slug}/epilogue`}
             >
-                Lösung anzeigen
+                Epilog anzeigen
             </Link>
         </>
     );
@@ -43,12 +43,12 @@ function Encrypted({ slug }: Props) {
     return (
         <>
             <p>
-                Um die Lösung für diese Aufgabe anzuzeigen, musst du sie zuerst
+                Um den Epilog für diese Aufgabe anzuzeigen, musst du sie zuerst
                 lösen und dann das in der Aufgabenstellung beschriebene Passwort
                 hier eingeben.
             </p>
             <Form
-                action={`/advent/${slug}/solution`}
+                action={`/advent/${slug}/epilogue`}
                 className="flex w-full flex-col items-center gap-3 md:flex-row"
                 onSubmit={onSubmit}
             >
@@ -67,14 +67,14 @@ function Encrypted({ slug }: Props) {
                     type="submit"
                     variant="outline"
                 >
-                    Lösung anzeigen
+                    Epilog anzeigen
                 </Button>
             </Form>
         </>
     );
 }
 
-export default function SolutionNote({ slug, decrypted }: Props) {
+export default function EpilogueNote({ slug, decrypted }: Props) {
     return (
         <Alert>
             {decrypted ? (
@@ -83,7 +83,7 @@ export default function SolutionNote({ slug, decrypted }: Props) {
                 <Lock className="h-4 w-4" />
             )}
             <AlertTitle>
-                Lösungen {decrypted ? 'veröffentlicht' : 'entsperren'}
+                Epilog {decrypted ? 'veröffentlicht' : 'entsperren'}
             </AlertTitle>
             <AlertDescription>
                 <div className="flex flex-col gap-3">

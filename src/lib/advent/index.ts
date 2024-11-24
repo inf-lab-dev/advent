@@ -36,9 +36,9 @@ export interface Task {
         content: FileContent;
 
         /**
-         * Possibly the tasks solution.
+         * Possibly the tasks epilogue.
          */
-        solution: FileContent | null;
+        epilogue: FileContent | null;
     };
 }
 

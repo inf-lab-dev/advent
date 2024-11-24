@@ -63,14 +63,14 @@ async function loadTasks(): Promise<Tasks> {
                         manifest.files.content,
                     ),
                 ),
-                solution: manifest.files.solution
+                epilogue: manifest.files.epilogue
                     ? await loadMarkdown(
                           path.join(
                               TASKS_FOLDER,
                               taskDirectory.name,
-                              manifest.files.solution,
+                              manifest.files.epilogue,
                           ),
-                          !manifest.is_solution_public,
+                          !manifest.is_epilogue_public,
                       )
                     : null,
             },
