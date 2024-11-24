@@ -8,6 +8,8 @@ import TokenList from './card/token-list';
 
 export interface ImportedToken {
     token: Token;
+    rawToken: string;
+    email: string;
     comment: string;
 }
 
