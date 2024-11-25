@@ -94,46 +94,50 @@ export default async function Home() {
                     &nbsp;es Schritt für Schritt
                 </h2>
                 <p className="mx-auto mb-8 mt-4 text-xl text-muted-foreground md:w-3/4">
-                    Um viel Spaß bei der Bearbeitung der Aufgaben zu haben,
-                    empfehlen wir dir die folgenden Schritte zu bearbeiten.
+                    Um Erfolgreich am Advent of Inf-Labs teilzunehmen, solltest
+                    du jeden Adventssonntag eine Aufgabe lösen. Mehr Infos dazu
+                    kannst du im
+                    &nbsp;
+                    <a className="text-blue-800 hover:underline" href="/faq">
+                        FAQ
+                    </a>
+                    &nbsp;
+                    nachlesen. Folge am besten den folgenden Schritte:
                 </p>
 
-                <div className="grid grid-cols-1 gap-8 md:grid-cols-2 lg:grid-cols-4">
+                <div className="grid grid-cols-1 gap-8 md:grid-cols-2 lg:grid-cols-3">
                     <Card className="bg-muted/50">
                         <CardHeader>
                             <CardTitle className="grid place-items-center gap-4">
                                 <DoorOpen />
-                                Lorem
+                                Schritt 1
                             </CardTitle>
                         </CardHeader>
-                        <CardContent>Ipsum</CardContent>
+                        <CardContent>
+                            Aufgabe lösen und Lösungswort eingeben
+                        </CardContent>
                     </Card>
                     <Card className="bg-muted/50">
                         <CardHeader>
                             <CardTitle className="grid place-items-center gap-4">
                                 <DoorOpen />
-                                Lorem
+                                Schritt 2
                             </CardTitle>
                         </CardHeader>
-                        <CardContent>Ipsum</CardContent>
+                        <CardContent>
+                            Token generieren und an den Tutor senden
+                        </CardContent>
                     </Card>
                     <Card className="bg-muted/50">
                         <CardHeader>
                             <CardTitle className="grid place-items-center gap-4">
                                 <DoorOpen />
-                                Lorem
+                                Schritt 3
                             </CardTitle>
                         </CardHeader>
-                        <CardContent>Ipsum</CardContent>
-                    </Card>
-                    <Card className="bg-muted/50">
-                        <CardHeader>
-                            <CardTitle className="grid place-items-center gap-4">
-                                <DoorOpen />
-                                Lorem
-                            </CardTitle>
-                        </CardHeader>
-                        <CardContent>Ipsum</CardContent>
+                        <CardContent>
+                            Wir tragen euch in ein Leaderboard ein
+                        </CardContent>
                     </Card>
                 </div>
             </section>
