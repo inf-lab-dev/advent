@@ -1,5 +1,3 @@
-Foo!
-
 # Hello World
 
 > I like cheese!

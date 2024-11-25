@@ -1,12 +1,12 @@
 {
-    "title": "Aufgabentitel",
-    "candles": 1,
+    "title": "Test Aufgabe",
+    "candles": 0,
     "is_epilogue_public": false,
     "supports_hand_in": true,
-    "is_draft": true,
+    "is_draft": false,
     "navigation": {
-        "weight": 98,
-        "title": "1. Advent"
+        "weight": 99,
+        "title": "Test Aufgabe"
     },
     "files": {
         "content": "./index.md",
