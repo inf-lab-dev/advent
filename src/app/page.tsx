@@ -2,7 +2,7 @@ import AdventWreath from '@/components/advent-wreath';
 import { buttonVariants } from '@/components/ui/button';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { fetchAdventTasks } from '@/lib/advent/loader';
-import { DoorOpen } from 'lucide-react';
+import { Award, KeyRound, LockOpen } from 'lucide-react';
 import Link from 'next/link';
 
 async function getHighestCandle() {
@@ -96,20 +96,18 @@ export default async function Home() {
                 <p className="mx-auto mb-8 mt-4 text-xl text-muted-foreground md:w-3/4">
                     Um Erfolgreich am Advent of Inf-Labs teilzunehmen, solltest
                     du jeden Adventssonntag eine Aufgabe lösen. Mehr Infos dazu
-                    kannst du im
-                    &nbsp;
-                    <a className="text-blue-800 hover:underline" href="/faq">
+                    kannst du im&nbsp;
+                    <Link className="font-bold underline" href="/faq">
                         FAQ
-                    </a>
-                    &nbsp;
-                    nachlesen. Folge am besten den folgenden Schritte:
+                    </Link>
+                    &nbsp;nachlesen. Folge am besten den folgenden Schritte:
                 </p>
 
-                <div className="grid grid-cols-1 gap-8 md:grid-cols-2 lg:grid-cols-3">
+                <div className="grid grid-cols-1 gap-8 md:grid-cols-3">
                     <Card className="bg-muted/50">
                         <CardHeader>
                             <CardTitle className="grid place-items-center gap-4">
-                                <DoorOpen />
+                                <LockOpen />
                                 Schritt 1
                             </CardTitle>
                         </CardHeader>
@@ -120,7 +118,7 @@ export default async function Home() {
                     <Card className="bg-muted/50">
                         <CardHeader>
                             <CardTitle className="grid place-items-center gap-4">
-                                <DoorOpen />
+                                <KeyRound />
                                 Schritt 2
                             </CardTitle>
                         </CardHeader>
@@ -131,7 +129,7 @@ export default async function Home() {
                     <Card className="bg-muted/50">
                         <CardHeader>
                             <CardTitle className="grid place-items-center gap-4">
-                                <DoorOpen />
+                                <Award />
                                 Schritt 3
                             </CardTitle>
                         </CardHeader>
