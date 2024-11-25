@@ -2,7 +2,7 @@ import AdventWreath from '@/components/advent-wreath';
 import { buttonVariants } from '@/components/ui/button';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { fetchAdventTasks } from '@/lib/advent/loader';
-import { DoorOpen } from 'lucide-react';
+import { Award, KeyRound, LockOpen } from 'lucide-react';
 import Link from 'next/link';
 
 async function getHighestCandle() {
@@ -94,69 +94,51 @@ export default async function Home() {
                     &nbsp;es Schritt für Schritt
                 </h2>
                 <p className="mx-auto mb-8 mt-4 text-xl text-muted-foreground md:w-3/4">
-                    Um viel Spaß bei der Bearbeitung der Aufgaben zu haben,
-                    empfehlen wir dir die folgenden Schritte zu bearbeiten.
+                    Um Erfolgreich am Advent of Inf-Labs teilzunehmen, solltest
+                    du jeden Adventssonntag eine Aufgabe lösen. Mehr Infos dazu
+                    kannst du im&nbsp;
+                    <Link className="font-bold underline" href="/faq">
+                        FAQ
+                    </Link>
+                    &nbsp;nachlesen. Folge am besten den folgenden Schritte:
                 </p>
 
-                <div className="grid grid-cols-1 gap-8 md:grid-cols-2 lg:grid-cols-4">
+                <div className="grid grid-cols-1 gap-8 md:grid-cols-3">
                     <Card className="bg-muted/50">
                         <CardHeader>
                             <CardTitle className="grid place-items-center gap-4">
-                                <DoorOpen />
-                                Lorem
+                                <LockOpen />
+                                Schritt 1
                             </CardTitle>
                         </CardHeader>
-                        <CardContent>Ipsum</CardContent>
+                        <CardContent>
+                            Aufgabe lösen und Lösungswort eingeben
+                        </CardContent>
                     </Card>
                     <Card className="bg-muted/50">
                         <CardHeader>
                             <CardTitle className="grid place-items-center gap-4">
-                                <DoorOpen />
-                                Lorem
+                                <KeyRound />
+                                Schritt 2
                             </CardTitle>
                         </CardHeader>
-                        <CardContent>Ipsum</CardContent>
+                        <CardContent>
+                            Token generieren und an den Tutor senden
+                        </CardContent>
                     </Card>
                     <Card className="bg-muted/50">
                         <CardHeader>
                             <CardTitle className="grid place-items-center gap-4">
-                                <DoorOpen />
-                                Lorem
+                                <Award />
+                                Schritt 3
                             </CardTitle>
                         </CardHeader>
-                        <CardContent>Ipsum</CardContent>
-                    </Card>
-                    <Card className="bg-muted/50">
-                        <CardHeader>
-                            <CardTitle className="grid place-items-center gap-4">
-                                <DoorOpen />
-                                Lorem
-                            </CardTitle>
-                        </CardHeader>
-                        <CardContent>Ipsum</CardContent>
+                        <CardContent>
+                            Wir tragen euch in ein Leaderboard ein
+                        </CardContent>
                     </Card>
                 </div>
             </section>
-
-            <div>
-                TODO: Somewhere on the page drop credit for the wreath images:
-                <p>
-                    Image by&nbsp;
-                    <a
-                        className="text-blue-800 hover:underline"
-                        href="https://pixabay.com/users/openclipart-vectors-30363"
-                    >
-                        OpenClipart-Vectors
-                    </a>
-                    &nbsp;from&nbsp;
-                    <a
-                        className="text-blue-800 hover:underline"
-                        href="https://pixabay.com/"
-                    >
-                        Pixabay
-                    </a>
-                </p>
-            </div>
         </div>
     );
 }

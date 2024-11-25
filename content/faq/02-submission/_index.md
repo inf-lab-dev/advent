@@ -1,3 +1,3 @@
-# Aufgaben abgeben
+# Abgabe
 
 Allgemeine Fragen zur Abgabe von Aufgaben.
