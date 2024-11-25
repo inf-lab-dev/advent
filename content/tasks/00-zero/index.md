@@ -1,5 +1,3 @@
-Foo!
-
 # Hallo vom Advent of Inf-Labs Team 👋
 
 Mithilfe dieser Seite kannst du den Prozess einen _Token_ zu erstellen einmal vorab ausprobieren. Der Prozess ist für
