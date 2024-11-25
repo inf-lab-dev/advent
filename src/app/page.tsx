@@ -23,7 +23,7 @@ export default async function Home() {
             <section className="container grid place-items-center gap-10 py-20 md:py-32 lg:grid-cols-2">
                 <div className="overflow-hodden space-y-6 text-center lg:text-start">
                     <main className="text-5xl font-bold md:text-6xl">
-                        <h1 className="inline break-words">
+                        <h1 className="inline break-all">
                             <span className="inline bg-gradient-to-r from-primary to-red-500 bg-clip-text text-transparent">
                                 Advent
                             </span>
