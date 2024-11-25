@@ -1,3 +1,3 @@
 # advent
 
-The source code of the advent challenges.
+The website of the advent challenges.
