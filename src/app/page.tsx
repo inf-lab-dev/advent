@@ -139,26 +139,6 @@ export default async function Home() {
                     </Card>
                 </div>
             </section>
-
-            <div>
-                TODO: Somewhere on the page drop credit for the wreath images:
-                <p>
-                    Image by&nbsp;
-                    <a
-                        className="text-blue-800 hover:underline"
-                        href="https://pixabay.com/users/openclipart-vectors-30363"
-                    >
-                        OpenClipart-Vectors
-                    </a>
-                    &nbsp;from&nbsp;
-                    <a
-                        className="text-blue-800 hover:underline"
-                        href="https://pixabay.com/"
-                    >
-                        Pixabay
-                    </a>
-                </p>
-            </div>
         </div>
     );
 }
