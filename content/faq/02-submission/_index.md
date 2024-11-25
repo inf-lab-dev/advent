@@ -1,3 +1,3 @@
 # Aufgaben abgeben
 
-Allgemeine Fragen zu den Abgaben.
+Allgemeine Fragen zur Abgabe von Aufgaben.
