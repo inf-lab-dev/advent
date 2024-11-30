@@ -1,13 +1,13 @@
-# 1. Advent - Wunschzettel sortieren
+# Wunschzettel sortieren
 
 Weihnachten steht kurz bevor, und im
-Weihnachtsmanndorf[Rovaniemi](https://de.m.wikipedia.org/wiki/Datei:Weihnachtsmanndorf_Rovaniemi.jpg)herrscht
-geschäftiges Treiben. In den letzten Jahren hat sich auch der Weihnachtsmann der modernen Technologie zugewandt: Alle*
-*Wunschzettel**werden jetzt digital verwaltet! Die Wichtel haben eine spezielle Software namens GiftNow entwickelt, mit
-der die Zettel direkt ins System eingescannt werden. Außerdem müssen die Wunschzettel nach der Anzahl der Geschenke, die
-die Kinder darauf geschrieben haben, sortiert werden. So spart der Weihnachtsmann wertvolle Zeit beim Abholen der
-Geschenke aus dem Lager. Die Aufgabe des Sortierens müssen die Wichtel von Hand übernehmen. Dieser Arbeitsschritt kann
-noch nicht automatisiert von GiftNow übernommen werden.
+Weihnachtsmanndorf [Rovaniemi](https://de.m.wikipedia.org/wiki/Datei:Weihnachtsmanndorf_Rovaniemi.jpg) herrscht
+geschäftiges Treiben. In den letzten Jahren hat sich auch der Weihnachtsmann der modernen Technologie zugewandt:
+Alle **Wunschzettel** werden jetzt digital verwaltet! Die Wichtel haben eine spezielle Software namens _GiftNow_
+entwickelt, mit der die Zettel direkt ins System eingescannt werden. Außerdem müssen die Wunschzettel nach der Anzahl
+der Geschenke, die die Kinder darauf geschrieben haben, sortiert werden. So spart der Weihnachtsmann wertvolle Zeit beim
+Abholen der Geschenke aus dem Lager. Die Aufgabe des Sortierens müssen die Wichtel von Hand übernehmen. Dieser
+Arbeitsschritt kann noch nicht automatisiert von _GiftNow_ übernommen werden.
 
 Am 1. Dezember macht sich Glimmerzwickel, die leitende Wichtel-IT-Expertin, gerade an die letzte Prüfung der
 Wunschzettel-Datenbank. Die Datenbank scheint vollständig zu sein, und alles sieht perfekt aus. Doch plötzlich ertönt
