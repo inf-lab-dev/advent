@@ -4,9 +4,9 @@ Weihnachten steht kurz bevor, und im
 Weihnachtsmanndorf [Rovaniemi](https://de.m.wikipedia.org/wiki/Datei:Weihnachtsmanndorf_Rovaniemi.jpg) herrscht
 geschäftiges Treiben. In den letzten Jahren hat sich auch der Weihnachtsmann der modernen Technologie zugewandt:
 Alle **Wunschzettel** werden jetzt digital verwaltet! Die Wichtel haben eine spezielle Software namens _GiftNow_
-entwickelt, mit der die Zettel direkt ins System eingescannt werden. Außerdem müssen die Wunschzettel nach der Anzahl
-der Geschenke, die die Kinder darauf geschrieben haben, sortiert werden. So spart der Weihnachtsmann wertvolle Zeit beim
-Abholen der Geschenke aus dem Lager. Die Aufgabe des Sortierens müssen die Wichtel von Hand übernehmen. Dieser
+entwickelt, mit der die Zettel direkt ins System eingescannt werden. Außerdem müssen die **Wunschzettel** nach der
+Anzahl der Geschenke, die die Kinder darauf geschrieben haben, sortiert werden. So spart der Weihnachtsmann wertvolle
+Zeit beim Abholen der Geschenke aus dem Lager. Die Aufgabe des Sortierens müssen die Wichtel von Hand übernehmen. Dieser
 Arbeitsschritt kann noch nicht automatisiert von _GiftNow_ übernommen werden.
 
 Am 1. Dezember macht sich Glimmerzwickel, die leitende Wichtel-IT-Expertin, gerade an die letzte Prüfung der
@@ -24,8 +24,8 @@ Geschenke rechtzeitig zu verteilen!"
 Der Weihnachtsmann reibt sich die Stirn. "Was machen wir jetzt? Wir können die Listen doch nicht manuell durchgehen. Das
 dauert Monate!"
 
-Da kommt Glimmerzwickel eine Idee. Sie eilt zurück zu ihrem Arbeitsplatz, ruft alle IT-Wichtel zusammen und erklärt: "
-Wir benötigen ein Programm, das die Wunschzettel der Kinder nach der Anzahl der darauf vermerkten Geschenke sortiert –
+Da kommt Glimmerzwickel eine Idee. Sie eilt zurück zu ihrem Arbeitsplatz, ruft alle IT-Wichtel zusammen und erklärt:
+"Wir benötigen ein Programm, das die Wunschzettel der Kinder nach der Anzahl der darauf vermerkten Geschenke sortiert –
 und zwar in absteigender Reihenfolge. Schnell, jemand muss das programmieren!"
 
 Für einige Sekunden herrscht komplette Stille im Raum. Keiner traut sich diese Aufgabe zu. Du überlegst: "Ich belege
@@ -37,11 +37,11 @@ Geschenke rechtzeitig ausgeliefert werden. Einen solchen Vorfall gab es noch nie
 
 ## Aufgabe
 
-Schreibe ein Programm, das die Wunschzettel so sortiert, dass der Wunschzettel mit den meisten Geschenken am Anfang des
-Arrays steht und der Wunschzettel mit den wenigsten Geschenken am Ende des Arrays.
+Schreibe ein Programm, das die **Wunschzettel** so sortiert, dass der **Wunschzettel mit den meisten Geschenken am
+Anfang des Arrays** steht und der Wunschzettel mit den wenigsten Geschenken am Ende des Arrays.
 
 Glimmerzwickel hat bereits eine C-Datei für dich erstellt, in der schon einige Dinge implementiert sind. Es existiert
-bereits eine `struct` namens `wishlist` welche Daten einer einzelnen Wunschliste enthält. Das ist der Name (`name`) des
+bereits eine `struct` namens `wishlist`, welche Daten einer einzelnen Wunschliste enthält. Das ist der Name (`name`) des
 Kindes und die Anzahl der Geschenke (`num_of_presents`), die auf der Liste vermerkt sind. Außerdem existiert ein Array
 `wishlists`, welches alle Wunschlisten enthält. Dieses Array wird in der `create_wishlists` Funktion befüllt. Auch die
 `main` Funktion ist bereits fertig. Sie ruft die Funktion `create_wishlists` und `sort_wishlists` auf. Zum Schluss wird
@@ -169,4 +169,5 @@ Bei folgendem Beispiel, soll nach dem Sortieren folgendes raus kommen:
 **Eingabe:** `["Ben: 2", "Anna: 6", "Clara: 3", "David: 10"]` <br>
 **Ausgabe:** `David gets the most presents.`
 
-Der Name des Kinds mit den meisten Geschenken auf der Wunschliste ist das **Passwort** für diese Aufgabe.
+Der Name des Kinds mit den meisten Geschenken auf der Wunschliste ist das **Passwort** für diese Aufgabe. Im Falle des
+obigen Beispiels würdest du also **David** als Passwort eingeben.
