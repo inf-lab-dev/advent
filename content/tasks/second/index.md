@@ -1,4 +1,4 @@
-## Geschenkgrößen zählen
+# Geschenkgrößen zählen
 
 Glimmerzwickel, die IT-Expertin der Wichtelwerkstatt, war in heller Aufregung, als sie dem Weihnachtsmann von deinem Erfolg in der letzten Woche berichtete. Dein Programm lief einwandfrei, und endlich war sichergestellt, dass alle Geschenke rechtzeitig geplant werden konnten. Doch kaum war dieses Problem gelöst, meldete sich schon die nächste Herausforderung: die Verpackung.
 
@@ -18,7 +18,7 @@ Funkelknirps reichte dir die vorbereitete C-Datei und eine Textdatei mit Geschen
 
 Mit den Worten des Weihnachtsmanns im Ohr und Funkelknirps’ unerschütterlichem Vertrauen im Rücken warst du bereit, die nächste Herausforderung anzupacken. Weihnachten hing von deiner Lösung ab – und du warst fest entschlossen, auch dieses Mal zu glänzen!
 
-### Aufgabe
+## Aufgabe
 
 Schreibe ein Programm, das berechnet, wie viele Verpackungen in welcher Größe benötigt werden. Die Größen `1-10` sind verfügbar.
 
