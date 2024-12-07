@@ -16,7 +16,7 @@ export interface Props {
 function Decrypted({ slug }: Props) {
     return (
         <>
-            <p>Der Epilog für diese Aufgabe wurden bereits veröffentlicht.</p>
+            <p>Der Epilog für diese Aufgabe wurde bereits veröffentlicht.</p>
             <Link
                 className={buttonVariants({
                     variant: 'outline',
