@@ -60,16 +60,16 @@ Paketgrößen der Geschenke.
 Implementiere nun die Funktion `count_packages`, die die Anzahl der benötigten Verpackungen pro Größe berechnen und das
 Ergebnis ausgeben soll. Du kannst davon ausgehen, dass die Größen `1-10` für Geschenke zugelassen sind.
 
-**Beispiel:**
+Bei folgender eingabe soll dieses Ausgabe resultieren:
 
-- Eingabe: `gifts = [{size: 1}, {size: 2}, {size: 1}, {size: 3}, {size: 2}]`
-- Ausgabe:
+- **Eingabe:** `gifts = [{size: 1}, {size: 2}, {size: 1}, {size: 3}, {size: 2}]`
+- **Ausgabe:**
 
-```
-Größe 1: 2 Verpackungen
-Größe 2: 2 Verpackungen
-Größe 3: 1 Verpackung
-```
+    ```
+    Größe 1: 2 Verpackungen
+    Größe 2: 2 Verpackungen
+    Größe 3: 1 Verpackung
+    ```
 
 Die Ausgabe des Programms enthält die Anzahl der Verpackungen pro Größe. Beachte: Zugelassene Größen sind die Größen
 `1-10`.
