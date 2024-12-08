@@ -1,19 +1,9 @@
 import AdventWreath from '@/components/advent-wreath';
 import { buttonVariants } from '@/components/ui/button';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
-import { fetchAdventTasks } from '@/lib/advent/loader';
+import { getHighestCandle } from '@/lib/advent/loader';
 import { Award, KeyRound, LockOpen } from 'lucide-react';
 import Link from 'next/link';
-
-async function getHighestCandle() {
-    const tasks = await fetchAdventTasks();
-
-    return Array.from(tasks.values()).reduce(
-        (previous, { manifest: { candles } }) =>
-            candles > previous ? candles : previous,
-        0,
-    );
-}
 
 export default async function Home() {
     const candles = await getHighestCandle();
