@@ -12,14 +12,16 @@ export interface Props {
 
 const IMAGES = [noAdvent, firstAdvent, secondAdvent, thirdAdvent, fourthAdvent];
 
+export const getImage = (candles: number) => IMAGES[candles % 4];
+
 export default function AdventWreath({ candles }: Props) {
-    const index = useMemo(() => candles % 4, [candles]);
+    const image = useMemo(() => getImage(candles), [candles]);
 
     return (
         <div>
             <Image
-                alt={`Adventskranz mit ${index} brennenden Kerzen`}
-                src={IMAGES[index]}
+                alt={`Adventskranz mit ${candles} brennenden Kerzen`}
+                src={image}
                 priority
             />
         </div>

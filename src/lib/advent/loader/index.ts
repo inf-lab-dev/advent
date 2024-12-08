@@ -86,3 +86,19 @@ async function loadTasks(): Promise<Tasks> {
  * @see {@link loadTasks}
  */
 export const fetchAdventTasks = cache(loadTasks);
+
+/**
+ * Helper function that determines the highest active candle
+ * from all {@link fetchAdventTasks}.
+ *
+ * @returns the number of the highest candle
+ */
+export async function getHighestCandle() {
+    const tasks = await fetchAdventTasks();
+
+    return Array.from(tasks.values()).reduce(
+        (previous, { manifest: { candles } }) =>
+            candles > previous ? candles : previous,
+        0,
+    );
+}
