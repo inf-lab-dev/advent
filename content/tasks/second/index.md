@@ -62,8 +62,8 @@ Ergebnis ausgeben soll. Du kannst davon ausgehen, dass die Größen `1-10` für 
 
 Bei folgender eingabe soll dieses Ausgabe resultieren:
 
-- **Eingabe:** `gifts = [{size: 1}, {size: 2}, {size: 1}, {size: 3}, {size: 2}]`
-- **Ausgabe:**
+-   **Eingabe:** `gifts = [{size: 1}, {size: 2}, {size: 1}, {size: 3}, {size: 2}]`
+-   **Ausgabe:**
 
     ```
     Größe 1: 2 Verpackungen
@@ -71,8 +71,8 @@ Bei folgender eingabe soll dieses Ausgabe resultieren:
     Größe 3: 1 Verpackung
     ```
 
-Die Ausgabe des Programms enthält die Anzahl der Verpackungen pro Größe. Beachte: Zugelassene Größen sind die Größen
+Die Ausgabe des Programms enthält die Anzahl der Verpackungen pro Größe. _Beachte:_ Zugelassene Größen sind die Größen
 `1-10`.
 
-Wie oft wird die Verpackung der Größe 3 benötigt? Die **Zahl** ist das Lösungswort. In diesem Beispiel wäre das *
-*Passwort** also `1`.
+Wie oft wird die Verpackung der Größe 3 benötigt? Die **Zahl** ist das Lösungswort. In diesem Beispiel wäre das
+**Passwort** also `1`.
