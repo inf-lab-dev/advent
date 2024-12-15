@@ -1,0 +1,15 @@
+{
+    "title": "3. Advent",
+    "candles": 3,
+    "is_epilogue_public": false,
+    "supports_hand_in": true,
+    "is_draft": false,
+    "navigation": {
+        "weight": 96,
+        "title": "3. Advent"
+    },
+    "files": {
+        "content": "./index.md",
+        "epilogue": "./epilogue.md"
+    }
+}

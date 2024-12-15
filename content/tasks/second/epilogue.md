@@ -1,1 +1,8 @@
-AkASItlDu+UHt/vQT1YfD20ZfC43P88ugn5706JwDQWwZr83y3NzW3GpE2KCkK5FiShECyVLi8/fUDkE2NJxDco3BdsLc+DnZOvAu/RqfI2v70iD4SgOa+ghtPGcQy8u63yo5ACFbTpNtYEl6tEubg/JucwNN+ZDgzXsPfOaUitDDrBGW2DUOfQu67/8uxPAXk99TFGY0ezTqIuBz3ipjtEYeHZ6WRhcwOd9YmWHnC5wYqqlONXig4GfSNxwS2ltSRG8aMBZKDdoUQAngLTENce+eGIJ9D+aHKES6Q93YTvL+P9To/Y8lWuhRkX/efFQQP+UiA6RlGT4GmNyrhKcvl7PESiawmRT3iF+qnuTBUTKPtMRqzN36fr8NoftmfGFIQug4ulwtGrfzFbzNBWmggno5lgNO1jgaOsAsaoYCOuHAgwQcjO4QlZCRDB+NvvnUH7pCzWXaW+ddxQF6bLmsf046X11L3FXBPd3M6tW4FuOH637g4N0NwDyxF9yhxbeGvoUuqiYVezSkw76qj8BGBcks1LxEk5qWlUlG90wUhgPZeNomIHp6m3hAs0maYiTTKoDzSuGMQ0Aw0nlAC3iQQb/KHOJCZWj8L3U4/Nb1Z0iSHgmktDSbvlvL1I8I+cQcwgVUpAt+kBWbWzlVi6XDBHaCg8zxbap90QYh438DGiymmA=
+# Geschenkgrößen zählen
+
+Der Weihnachtsmann klopft dir herzlich auf die Schulter. „Hervorragend! Dank dir können wir jetzt genau planen, und
+Weihnachten ist wieder ein Stückchen gerettet. Dein Code hat uns gezeigt, wie viele Verpackungen wir wirklich brauchen,
+und das Chaos ist passé.“
+
+Funkelknirps hebt seine riesige Brille und strahlt dich an. „Das war spitze! Mit solch einem Talent wird selbst die
+größte Herausforderung zu einem Kinderspiel.“
