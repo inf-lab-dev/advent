@@ -27,7 +27,7 @@ export default function ErrorPage({ icon, code, text, children }: Props) {
     const [IconComponent, iconClasses] = renderIcon(icon);
 
     return (
-        <div className="flex min-h-[70vh] flex-col items-center justify-center gap-5">
+        <div className="flex min-h-[70vh] flex-col items-center justify-center gap-5 p-4">
             <div className="flex items-center gap-3 text-[5rem]">
                 <IconComponent className={`${iconClasses} h-[5rem] w-[5rem]`} />
                 <Separator className="h-[5rem]" orientation="vertical" />
