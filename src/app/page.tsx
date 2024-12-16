@@ -9,7 +9,7 @@ function AdventOverBanner() {
     return (
         <Card className="w-3/4">
             <CardHeader>
-                <CardTitle className="flex items-center justify-center gap-4 text-xl">
+                <CardTitle className="flex items-center gap-4 text-xl">
                     <PartyPopper className="h-8 w-8 stroke-rose-500" />
                     <span className="bg-gradient-to-r from-rose-500 via-fuchsia-600 to-pink-500 bg-clip-text text-transparent">
                         Vielen Dank für eure Teilnahme!
