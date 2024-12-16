@@ -1,11 +1,11 @@
 import AdventWreath from '@/components/advent-wreath';
 import { buttonVariants } from '@/components/ui/button';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
-import { getHighestCandle } from '@/lib/advent/loader';
+import { fetchAdventTasks, getHighestCandle } from '@/lib/advent/loader';
 import { Award, KeyRound, LockOpen, PartyPopper } from 'lucide-react';
 import Link from 'next/link';
 
-function AdventOverAlert() {
+function AdventOverBanner() {
     return (
         <Card className="w-3/4">
             <CardHeader>
@@ -33,6 +33,12 @@ function AdventOverAlert() {
 
 export default async function Home() {
     const candles = await getHighestCandle();
+    const tasks = await fetchAdventTasks();
+
+    const showAdventOverBanner = Array.from(tasks.values()).every(
+        ({ manifest: { supports_hand_in, is_epilogue_public } }) =>
+            !supports_hand_in && is_epilogue_public,
+    );
 
     return (
         <div>
@@ -74,7 +80,7 @@ export default async function Home() {
                             Häufig gestellte Fragen
                         </Link>
                     </div>
-                    <AdventOverAlert />
+                    {showAdventOverBanner && <AdventOverBanner />}
                 </div>
 
                 <div className="relative z-10">
