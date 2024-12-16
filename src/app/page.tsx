@@ -15,18 +15,18 @@ function AdventOverBanner() {
                         Vielen Dank für eure Teilnahme!
                     </span>
                 </CardTitle>
-                <CardContent className="grid gap-3">
-                    <p>
-                        Das inf-lab.dev Team bedankt dich herzlich für eure
-                        Teilnahme. Wir wünschen euch ein frohes Weihnachtsfest
-                        und einen guten Rutsch in das nächste Jahr!
-                    </p>
-                    <p>
-                        Wir werden dann Anfang nächstes Jahres die Gewinner per
-                        E-Mail kontaktieren.
-                    </p>
-                </CardContent>
             </CardHeader>
+            <CardContent className="grid gap-3">
+                <p>
+                    Das inf-lab.dev Team bedankt dich herzlich für eure
+                    Teilnahme. Wir wünschen euch ein frohes Weihnachtsfest und
+                    einen guten Rutsch in das nächste Jahr!
+                </p>
+                <p>
+                    Wir werden dann Anfang nächstes Jahres die Gewinner per
+                    E-Mail kontaktieren.
+                </p>
+            </CardContent>
         </Card>
     );
 }
@@ -35,10 +35,12 @@ export default async function Home() {
     const candles = await getHighestCandle();
     const tasks = await fetchAdventTasks();
 
-    const showAdventOverBanner = Array.from(tasks.values()).every(
-        ({ manifest: { supports_hand_in, is_epilogue_public } }) =>
-            !supports_hand_in && is_epilogue_public,
-    );
+    const showAdventOverBanner =
+        true ||
+        Array.from(tasks.values()).every(
+            ({ manifest: { supports_hand_in, is_epilogue_public } }) =>
+                !supports_hand_in && is_epilogue_public,
+        );
 
     return (
         <div>
