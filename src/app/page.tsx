@@ -1,12 +1,44 @@
 import AdventWreath from '@/components/advent-wreath';
 import { buttonVariants } from '@/components/ui/button';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
-import { getHighestCandle } from '@/lib/advent/loader';
-import { Award, KeyRound, LockOpen } from 'lucide-react';
+import { fetchAdventTasks, getHighestCandle } from '@/lib/advent/loader';
+import { Award, KeyRound, LockOpen, PartyPopper } from 'lucide-react';
 import Link from 'next/link';
+
+function AdventOverBanner() {
+    return (
+        <Card className="w-3/4">
+            <CardHeader>
+                <CardTitle className="flex items-center gap-4 text-xl">
+                    <PartyPopper className="h-8 w-8 stroke-rose-500" />
+                    <span className="bg-gradient-to-r from-rose-500 via-fuchsia-600 to-pink-500 bg-clip-text text-transparent">
+                        Vielen Dank für eure Teilnahme!
+                    </span>
+                </CardTitle>
+            </CardHeader>
+            <CardContent className="grid gap-3">
+                <p>
+                    Das inf-lab.dev Team bedankt dich herzlich für eure
+                    Teilnahme. Wir wünschen euch ein frohes Weihnachtsfest und
+                    einen guten Rutsch in das nächste Jahr!
+                </p>
+                <p>
+                    Wir werden dann Anfang nächstes Jahres die Gewinner per
+                    E-Mail kontaktieren.
+                </p>
+            </CardContent>
+        </Card>
+    );
+}
 
 export default async function Home() {
     const candles = await getHighestCandle();
+    const tasks = await fetchAdventTasks();
+
+    const showAdventOverBanner = Array.from(tasks.values()).every(
+        ({ manifest: { supports_hand_in, is_epilogue_public } }) =>
+            !supports_hand_in && is_epilogue_public,
+    );
 
     return (
         <div>
@@ -48,6 +80,7 @@ export default async function Home() {
                             Häufig gestellte Fragen
                         </Link>
                     </div>
+                    {showAdventOverBanner && <AdventOverBanner />}
                 </div>
 
                 <div className="relative z-10">
