@@ -49,7 +49,7 @@ Knobelschlau hat die gegebenen Tests nach den Anforderungen im Lasten- und Pflic
 davon ausgehen, dass die Testfunktionen in `test_navigation_system.py` korrekt sind.
 
 <details>
-<summary>Annotationen von Knobelschlau</summary>
+<summary><b>Annotationen von Knobelschlau</b></summary>
 
 Knobelschlau hat dir zudem eine detaillierte Beschreibung der `find_closest_location` Funktion gegeben:
 
@@ -84,5 +84,3 @@ also eine Liste der Distanzen erhalten, die größer als `400` Kilometer sind.
 
 Das Lösungswort ist nun die Summe der Distanzen, die größer als `400` Kilometer sind. Gebe die Zahl ohne `.` oder `,`
 ein. Wäre die Summe als `123.456` ist das Lösungswort `123456`.
-
-
