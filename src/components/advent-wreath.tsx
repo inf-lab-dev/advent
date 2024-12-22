@@ -12,7 +12,7 @@ export interface Props {
 
 const IMAGES = [noAdvent, firstAdvent, secondAdvent, thirdAdvent, fourthAdvent];
 
-export const getImage = (candles: number) => IMAGES[candles % 4];
+export const getImage = (candles: number) => IMAGES[candles % 5];
 
 export default function AdventWreath({ candles }: Props) {
     const image = useMemo(() => getImage(candles), [candles]);
