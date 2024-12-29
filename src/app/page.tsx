@@ -23,7 +23,7 @@ function AdventOverBanner() {
                     einen guten Rutsch in das nächste Jahr!
                 </p>
                 <p>
-                    Wir werden dann Anfang nächstes Jahres die Gewinner per
+                    Wir werden dann Anfang nächsten Jahres die Gewinner per
                     E-Mail kontaktieren.
                 </p>
             </CardContent>
