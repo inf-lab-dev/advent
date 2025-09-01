@@ -19,7 +19,7 @@ function Decrypted({ slug }: Props) {
             <p>Der Epilog für diese Aufgabe wurde bereits veröffentlicht.</p>
             <Link
                 className={buttonVariants({
-                    variant: 'outline',
+                    variant: 'outline-solid',
                 })}
                 href={`/advent/${slug}/epilogue`}
             >
@@ -53,7 +53,7 @@ function Encrypted({ slug }: Props) {
                 onSubmit={onSubmit}
             >
                 <Input
-                    className={`w-full flex-grow ${isInvalid && touched ? 'border-red-500 focus-visible:ring-red-800' : ''}`}
+                    className={`w-full grow ${isInvalid && touched ? 'border-red-500 focus-visible:ring-red-800' : ''}`}
                     name="key"
                     placeholder="Passwort"
                     type="text"

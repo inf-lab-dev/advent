@@ -11,7 +11,7 @@ function AdventOverBanner() {
             <CardHeader>
                 <CardTitle className="flex items-center gap-4 text-xl">
                     <PartyPopper className="h-8 w-8 stroke-rose-500" />
-                    <span className="bg-gradient-to-r from-rose-500 via-fuchsia-600 to-pink-500 bg-clip-text text-transparent">
+                    <span className="bg-linear-to-r from-rose-500 via-fuchsia-600 to-pink-500 bg-clip-text text-transparent">
                         Vielen Dank für eure Teilnahme!
                     </span>
                 </CardTitle>
@@ -46,11 +46,11 @@ export default async function Home() {
                 <div className="overflow-hodden space-y-6 text-center lg:text-start">
                     <main className="text-5xl font-bold md:text-6xl">
                         <h1 className="inline break-all">
-                            <span className="inline bg-gradient-to-r from-primary to-red-500 bg-clip-text text-transparent">
+                            <span className="inline bg-linear-to-r from-primary to-red-500 bg-clip-text text-transparent">
                                 Advent
                             </span>
                             <span>&nbsp;of&nbsp;</span>
-                            <span className="inline whitespace-nowrap bg-gradient-to-r from-yellow-500 via-orange-500 to-red-700 bg-clip-text text-transparent">
+                            <span className="inline whitespace-nowrap bg-linear-to-r from-yellow-500 via-orange-500 to-red-700 bg-clip-text text-transparent">
                                 Inf-Labs
                             </span>
                         </h1>
@@ -73,7 +73,7 @@ export default async function Home() {
 
                         <Link
                             className={`w-full md:w-1/3 ${buttonVariants({
-                                variant: 'outline',
+                                variant: 'outline-solid',
                             })}`}
                             href="/faq"
                         >
@@ -87,7 +87,7 @@ export default async function Home() {
                     <AdventWreath candles={candles} />
 
                     {/* Shadow effect */}
-                    <div className="absolute left-[25%] top-0 -z-[1] h-[120%] w-[50%] rotate-[35deg] border-r-[24px] bg-yellow-300 blur-[150px] will-change-transform motion-safe:animate-pulse"></div>
+                    <div className="absolute left-[25%] top-0 -z-1 h-[120%] w-[50%] rotate-35 border-r-24 bg-yellow-300 blur-[150px] will-change-transform motion-safe:animate-pulse"></div>
                 </div>
             </section>
 
@@ -111,7 +111,7 @@ export default async function Home() {
             >
                 <h2 className="text-3xl font-bold md:text-4xl">
                     So&nbsp;
-                    <span className="bg-gradient-to-b from-primary/60 to-primary bg-clip-text text-transparent">
+                    <span className="bg-linear-to-b from-primary/60 to-primary bg-clip-text text-transparent">
                         funktioniert
                     </span>
                     &nbsp;es Schritt für Schritt

@@ -52,7 +52,7 @@ function WrongPassword({ task }: { task: Task }) {
                 <EpilogueNote decrypted={false} slug={task.slug} />
 
                 <Link
-                    className={buttonVariants({ variant: 'outline' })}
+                    className={buttonVariants({ variant: 'outline-solid' })}
                     href={`/advent/${task.slug}`}
                 >
                     Zurück zur Aufgabenstellung

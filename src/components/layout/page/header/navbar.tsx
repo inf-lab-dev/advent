@@ -39,7 +39,7 @@ export function Navbar({ tasks }: Props) {
     return (
         <>
             <div className="h-20"></div>
-            <header className="fixed top-0 z-40 w-full border-b-[1px] bg-white dark:border-b-slate-700 dark:bg-background">
+            <header className="fixed top-0 z-40 w-full border-b bg-white dark:border-b-slate-700 dark:bg-background">
                 <NavigationMenu className="mx-auto">
                     <NavigationMenuList className="container flex h-14 w-screen justify-between px-4">
                         <NavigationMenuItem className="flex font-bold text-primary">

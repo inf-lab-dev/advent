@@ -29,8 +29,8 @@ export default function ErrorPage({ icon, code, text, children }: Props) {
     return (
         <div className="flex min-h-[70vh] flex-col items-center justify-center gap-5 p-4">
             <div className="flex items-center gap-3 text-[5rem]">
-                <IconComponent className={`${iconClasses} h-[5rem] w-[5rem]`} />
-                <Separator className="h-[5rem]" orientation="vertical" />
+                <IconComponent className={`${iconClasses} h-20 w-20`} />
+                <Separator className="h-20" orientation="vertical" />
                 <h1 className="font-bold">{code}</h1>
             </div>
             <p className="text-center text-xl">{text}</p>

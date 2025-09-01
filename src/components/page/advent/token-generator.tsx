@@ -69,7 +69,7 @@ function UnderstoodRelevanceCheckbox({
                     Bestandteil der Inf-Einf-B Veranstaltung sind.
                 </label>
                 {!understood && (
-                    <p className="text-sm leading-[1rem] text-muted-foreground">
+                    <p className="text-sm leading-4 text-muted-foreground">
                         Ich bestätige, dass ich verstanden habe, dass die
                         Inf-Labs kein offizieller Bestandteil der Veranstaltung
                         Inf-Einf-B sind. Außerdem erkläre ich, dass mir bewusst
