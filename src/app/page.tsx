@@ -35,10 +35,12 @@ export default async function Home() {
     const candles = await getHighestCandle();
     const tasks = await fetchAdventTasks();
 
-    const showAdventOverBanner = Array.from(tasks.values()).every(
-        ({ manifest: { supports_hand_in, is_epilogue_public } }) =>
-            !supports_hand_in && is_epilogue_public,
-    );
+    const showAdventOverBanner =
+        tasks.size > 0 &&
+        Array.from(tasks.values()).every(
+            ({ manifest: { supports_hand_in, is_epilogue_public } }) =>
+                !supports_hand_in && is_epilogue_public,
+        );
 
     return (
         <div>
