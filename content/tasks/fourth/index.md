@@ -70,8 +70,8 @@ Beachte, dass zwei Tests immer noch fehlschlagen werden (`test_find_long_distanc
 Anforderungen an diese Funktion werden im folgenden geschildert.
 
 Nachdem du alle Fehler korrigiert hast, sollst du noch die Funktion `find_long_distances` implementieren. Diese Funktion
-soll eine Ganzzahl als Argument übergeben bekommen. Diese Ganzzahl ist der `threshold`, ab dem eine Distanz als *lange
-Distanz* gilt. Demnach soll die Funktion die entsprechenden Distanzen filtern und in einer Liste nur die zurückgeben,
+soll eine Ganzzahl als Argument übergeben bekommen. Diese Ganzzahl ist der `threshold`, ab dem eine Distanz als _lange
+Distanz_ gilt. Demnach soll die Funktion die entsprechenden Distanzen filtern und in einer Liste nur die zurückgeben,
 die länger als der übergebene `threshold` sind. Die Elemente in der Liste soll nach folgender Struktur aufgebaut sein:
 `((start, end), distance)`. Ob du die Vorgaben genau einhältst, kannst du anhand der Tests überprüfen.
 
