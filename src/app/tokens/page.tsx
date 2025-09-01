@@ -3,9 +3,7 @@ import { Alert, AlertDescription, AlertTitle } from '@/components/ui/alert';
 import { Metadata } from 'next';
 import Link from 'next/link';
 
-export const metadata: Metadata = {
-    title: 'Token-Validierung',
-};
+export const metadata: Metadata = { title: 'Token-Validierung' };
 
 export default async function Tokens() {
     return (
@@ -15,14 +13,16 @@ export default async function Tokens() {
             <Alert>
                 <AlertTitle>Hinweis</AlertTitle>
                 <AlertDescription>
-                    Diese Seite ist lediglich für die interne Überprüfung der
-                    Tokens gedacht und ist ohne den korrekten privaten Schlüssel
-                    Funktionslos. Solltest du versehentlich auf dieser Seite
-                    gelandet sein, kommst du&nbsp;
-                    <Link className="hover:underline" href="/">
-                        hier zur Startseite
-                    </Link>
-                    .
+                    <p>
+                        Diese Seite ist lediglich für die interne Überprüfung
+                        der Tokens gedacht und ist ohne den korrekten privaten
+                        Schlüssel Funktionslos. Solltest du versehentlich auf
+                        dieser Seite gelandet sein, kommst du&nbsp;
+                        <Link className="hover:underline" href="/">
+                            hier zur Startseite
+                        </Link>
+                        .
+                    </p>
                 </AlertDescription>
             </Alert>
 

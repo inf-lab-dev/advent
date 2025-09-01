@@ -111,9 +111,7 @@ export default async function Home() {
             >
                 <h2 className="text-3xl font-bold md:text-4xl">
                     So&nbsp;
-                    <span className="from-primary/60 to-primary bg-linear-to-b bg-clip-text text-transparent">
-                        funktioniert
-                    </span>
+                    <span className="text-primary">funktioniert</span>
                     &nbsp;es Schritt für Schritt
                 </h2>
                 <p className="text-muted-foreground mx-auto mt-4 mb-8 text-xl md:w-3/4">
