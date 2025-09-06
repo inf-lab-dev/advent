@@ -70,7 +70,7 @@ export default function TokenList({ tokens }: Props) {
                         importierten Tokens.
                     </CardDescription>
                 </div>
-                <div className="flex flex-grow">
+                <div className="flex grow">
                     <Button
                         className="ml-auto w-full md:w-auto"
                         disabled={sortedTokens.length === 0}

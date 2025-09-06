@@ -52,7 +52,7 @@ function WrongPassword({ task }: { task: Task }) {
                 <EpilogueNote decrypted={false} slug={task.slug} />
 
                 <Link
-                    className={buttonVariants({ variant: 'outline' })}
+                    className={`text-foreground ${buttonVariants({ variant: 'outline' })}`}
                     href={`/advent/${task.slug}`}
                 >
                     Zurück zur Aufgabenstellung
@@ -64,7 +64,7 @@ function WrongPassword({ task }: { task: Task }) {
 
 function Loader() {
     return (
-        <div className="flex min-h-[70vh] flex-col items-center justify-center p-4 text-2xl text-primary">
+        <div className="text-primary flex min-h-[70vh] flex-col items-center justify-center p-4 text-2xl">
             <div className="items-middle flex items-center gap-2">
                 <Loader2 className="h-12 w-12 animate-spin" />
                 <span>Epilog entschlüsseln...</span>

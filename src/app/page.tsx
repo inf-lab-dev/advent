@@ -7,11 +7,11 @@ import Link from 'next/link';
 
 function AdventOverBanner() {
     return (
-        <Card className="w-3/4">
+        <Card className="w-full lg:w-3/4">
             <CardHeader>
                 <CardTitle className="flex items-center gap-4 text-xl">
                     <PartyPopper className="h-8 w-8 stroke-rose-500" />
-                    <span className="bg-gradient-to-r from-rose-500 via-fuchsia-600 to-pink-500 bg-clip-text text-transparent">
+                    <span className="bg-linear-to-r from-rose-500 via-fuchsia-600 to-pink-500 bg-clip-text text-transparent">
                         Vielen Dank für eure Teilnahme!
                     </span>
                 </CardTitle>
@@ -35,10 +35,12 @@ export default async function Home() {
     const candles = await getHighestCandle();
     const tasks = await fetchAdventTasks();
 
-    const showAdventOverBanner = Array.from(tasks.values()).every(
-        ({ manifest: { supports_hand_in, is_epilogue_public } }) =>
-            !supports_hand_in && is_epilogue_public,
-    );
+    const showAdventOverBanner =
+        tasks.size > 0 &&
+        Array.from(tasks.values()).every(
+            ({ manifest: { supports_hand_in, is_epilogue_public } }) =>
+                !supports_hand_in && is_epilogue_public,
+        );
 
     return (
         <div>
@@ -46,22 +48,22 @@ export default async function Home() {
                 <div className="overflow-hodden space-y-6 text-center lg:text-start">
                     <main className="text-5xl font-bold md:text-6xl">
                         <h1 className="inline break-all">
-                            <span className="inline bg-gradient-to-r from-primary to-red-500 bg-clip-text text-transparent">
+                            <span className="from-primary inline bg-linear-to-r to-red-500 bg-clip-text text-transparent">
                                 Advent
                             </span>
                             <span>&nbsp;of&nbsp;</span>
-                            <span className="inline whitespace-nowrap bg-gradient-to-r from-yellow-500 via-orange-500 to-red-700 bg-clip-text text-transparent">
+                            <span className="inline bg-linear-to-r from-yellow-500 via-orange-500 to-red-700 bg-clip-text whitespace-nowrap text-transparent">
                                 Inf-Labs
                             </span>
                         </h1>
                     </main>
 
-                    <p className="mx-auto text-xl text-muted-foreground md:w-10/12 lg:mx-0">
+                    <p className="text-muted-foreground mx-auto text-xl md:w-10/12 lg:mx-0">
                         Löse jeden Adventssonntag eine kleine Aufgabe um deine
                         Programmierfähigkeiten zu verbessern!
                     </p>
 
-                    <div className="space-y-4 md:space-x-4 md:space-y-0">
+                    <div className="space-y-4 md:space-y-0 md:space-x-4">
                         <a
                             className={`w-full md:w-1/3 ${buttonVariants({
                                 variant: 'default',
@@ -72,9 +74,7 @@ export default async function Home() {
                         </a>
 
                         <Link
-                            className={`w-full md:w-1/3 ${buttonVariants({
-                                variant: 'outline',
-                            })}`}
+                            className={`text-foreground w-full md:w-1/3 ${buttonVariants({ variant: 'outline' })}`}
                             href="/faq"
                         >
                             Häufig gestellte Fragen
@@ -87,16 +87,16 @@ export default async function Home() {
                     <AdventWreath candles={candles} />
 
                     {/* Shadow effect */}
-                    <div className="absolute left-[25%] top-0 -z-[1] h-[120%] w-[50%] rotate-[35deg] border-r-[24px] bg-yellow-300 blur-[150px] will-change-transform motion-safe:animate-pulse"></div>
+                    <div className="absolute top-0 left-[25%] -z-1 h-[120%] w-[50%] rotate-35 border-r-24 bg-yellow-300 blur-[150px] will-change-transform motion-safe:animate-pulse"></div>
                 </div>
             </section>
 
             <section className="container pt-24 sm:py-32">
-                <h2 className="text-md mb-8 text-center font-bold text-primary lg:text-xl">
+                <h2 className="text-md text-primary mb-8 text-center font-bold lg:text-xl">
                     Hinweis
                 </h2>
 
-                <p className="text-center text-muted-foreground">
+                <p className="text-muted-foreground text-center">
                     Wie sämtliches Material auf inf-lab.dev ist auch
                     dieses&nbsp;
                     <em>nicht direkt klausurrelevant</em>.<br />
@@ -111,12 +111,10 @@ export default async function Home() {
             >
                 <h2 className="text-3xl font-bold md:text-4xl">
                     So&nbsp;
-                    <span className="bg-gradient-to-b from-primary/60 to-primary bg-clip-text text-transparent">
-                        funktioniert
-                    </span>
+                    <span className="text-primary">funktioniert</span>
                     &nbsp;es Schritt für Schritt
                 </h2>
-                <p className="mx-auto mb-8 mt-4 text-xl text-muted-foreground md:w-3/4">
+                <p className="text-muted-foreground mx-auto mt-4 mb-8 text-xl md:w-3/4">
                     Um Erfolgreich am Advent of Inf-Labs teilzunehmen, solltest
                     du jeden Adventssonntag eine Aufgabe lösen. Mehr Infos dazu
                     kannst du im&nbsp;

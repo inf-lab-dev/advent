@@ -11,6 +11,7 @@ import {
     DialogTitle,
     DialogTrigger,
 } from '@/components/ui/dialog';
+import { Label } from '@/components/ui/label';
 import { Separator } from '@/components/ui/separator';
 import { Textarea } from '@/components/ui/textarea';
 import { Token } from '@/lib/advent/token';
@@ -61,15 +62,15 @@ function UnderstoodRelevanceCheckbox({
                 onCheckedChange={onUnderstoodChanged}
             />
             <div className="grid gap-1.5 leading-none">
-                <label
-                    className={`${!understood ? 'text-red-700' : ''} text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70`}
+                <Label
+                    className={`${!understood ? 'text-red-700' : ''} text-sm leading-none font-medium peer-disabled:cursor-not-allowed peer-disabled:opacity-70`}
                     htmlFor={id}
                 >
                     Ich habe verstanden, dass die Inf-Labs kein offizieller
                     Bestandteil der Inf-Einf-B Veranstaltung sind.
-                </label>
+                </Label>
                 {!understood && (
-                    <p className="text-sm leading-[1rem] text-muted-foreground">
+                    <p className="text-muted-foreground text-sm leading-4">
                         Ich bestätige, dass ich verstanden habe, dass die
                         Inf-Labs kein offizieller Bestandteil der Veranstaltung
                         Inf-Einf-B sind. Außerdem erkläre ich, dass mir bewusst

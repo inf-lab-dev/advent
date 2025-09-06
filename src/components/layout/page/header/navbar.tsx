@@ -26,9 +26,7 @@ export interface Props {
 }
 
 const faqButtonClasses = (pathname: string) =>
-    buttonVariants({
-        variant: pathname === '/faq' ? 'default' : 'secondary',
-    });
+    buttonVariants({ variant: pathname === '/faq' ? 'default' : 'secondary' });
 
 export function Navbar({ tasks }: Props) {
     const [isOpen, setIsOpen] = useState(false);
@@ -39,10 +37,10 @@ export function Navbar({ tasks }: Props) {
     return (
         <>
             <div className="h-20"></div>
-            <header className="fixed top-0 z-40 w-full border-b-[1px] bg-white dark:border-b-slate-700 dark:bg-background">
+            <header className="dark:bg-background fixed top-0 z-40 w-full border-b bg-white dark:border-b-slate-700">
                 <NavigationMenu className="mx-auto">
                     <NavigationMenuList className="container flex h-14 w-screen justify-between px-4">
-                        <NavigationMenuItem className="flex font-bold text-primary">
+                        <NavigationMenuItem className="text-primary flex font-bold">
                             <Link
                                 className="ml-2 flex items-center justify-center gap-1 text-xl font-bold"
                                 href="/"
@@ -66,9 +64,9 @@ export function Navbar({ tasks }: Props) {
                                     />
                                 </SheetTrigger>
 
-                                <SheetContent side="right">
+                                <SheetContent side="right" className="p-6">
                                     <SheetHeader>
-                                        <SheetTitle className="text-xl font-bold text-primary">
+                                        <SheetTitle className="text-primary text-xl font-bold">
                                             Inf-Labs im Advent
                                         </SheetTitle>
                                     </SheetHeader>

@@ -62,7 +62,7 @@ export default function FileInput({ onKeyLoaded }: Props) {
                 />
             </CardContent>
             {!loadedOnce && (
-                <CardFooter className="text-sm text-muted-foreground">
+                <CardFooter className="text-muted-foreground text-sm">
                     Sobald eine Datei gewählt wurde, sind auch die weiteren
                     Panels sichtbar.
                 </CardFooter>
