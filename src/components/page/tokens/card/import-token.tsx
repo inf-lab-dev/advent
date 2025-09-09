@@ -111,9 +111,9 @@ export default function ImportToken({ privateKey, onTokenImported }: Props) {
                             E-Mail des Einsenders
                         </Label>
                         <Input
+                            aria-invalid={isEmailInvalid}
                             id={emailId}
                             type="email"
-                            aria-invalid={isEmailInvalid}
                             value={email}
                             onChange={(event) =>
                                 setEmail(event.target.value.trim())
@@ -128,8 +128,8 @@ export default function ImportToken({ privateKey, onTokenImported }: Props) {
                             Token
                         </Label>
                         <Textarea
-                            id={tokenId}
                             aria-invalid={token.length === 0}
+                            id={tokenId}
                             value={token}
                             onChange={(event) =>
                                 setToken(event.target.value.trim())

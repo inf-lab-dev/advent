@@ -51,11 +51,11 @@ function Encrypted({ slug }: Props) {
                 onSubmit={onSubmit}
             >
                 <Input
+                    aria-invalid={isInvalid && touched}
                     className={`text-foreground w-full grow`}
                     name="key"
                     placeholder="Passwort"
                     type="text"
-                    aria-invalid={isInvalid && touched}
                     value={password}
                     onChange={(event) => setPassword(event.target.value)}
                     onFocus={() => setTouched(true)}
