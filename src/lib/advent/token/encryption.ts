@@ -64,7 +64,7 @@ async function importPrivateKey(pem: string) {
     );
 }
 
-async function encryptUsingAes(payload: Uint8Array) {
+async function encryptUsingAes(payload: Uint8Array<ArrayBuffer>) {
     const iv = crypto.getRandomValues(new Uint8Array(12));
     const randomAesKey = await crypto.subtle.generateKey(
         {
@@ -81,7 +81,7 @@ async function encryptUsingAes(payload: Uint8Array) {
             iv,
         },
         randomAesKey,
-        payload,
+        payload.buffer,
     );
 
     const exportedAesKey = await crypto.subtle.exportKey('raw', randomAesKey);
@@ -140,7 +140,7 @@ export async function encryptToken(
         JSON.stringify({
             payload: encodeToBase64(encryptedPayload),
             aesKey: encodeToBase64(encryptedAesKey),
-            iv: encodeToBase64(iv),
+            iv: encodeToBase64(iv.buffer),
         }),
     );
 }
