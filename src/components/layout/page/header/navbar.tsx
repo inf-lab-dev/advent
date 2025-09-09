@@ -64,7 +64,7 @@ export function Navbar({ tasks }: Props) {
                                     />
                                 </SheetTrigger>
 
-                                <SheetContent side="right" className="p-6">
+                                <SheetContent className="p-6" side="right">
                                     <SheetHeader>
                                         <SheetTitle className="text-primary text-xl font-bold">
                                             Inf-Labs im Advent
