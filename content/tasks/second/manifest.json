@@ -1,7 +1,7 @@
 {
     "title": "2. Advent",
     "candles": 2,
-    "is_epilogue_public": true,
+    "is_epilogue_public": false,
     "supports_hand_in": false,
     "is_draft": true,
     "navigation": { "weight": 97, "title": "2. Advent" },

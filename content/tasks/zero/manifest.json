@@ -3,7 +3,7 @@
     "candles": 0,
     "is_epilogue_public": false,
     "supports_hand_in": true,
-    "is_draft": false,
+    "is_draft": true,
     "navigation": {
         "weight": 99,
         "title": "Test Aufgabe"
