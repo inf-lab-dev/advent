@@ -2,8 +2,8 @@
     "title": "4. Advent",
     "candles": 4,
     "is_epilogue_public": false,
-    "supports_hand_in": false,
-    "is_draft": true,
+    "supports_hand_in": true,
+    "is_draft": false,
     "navigation": { "weight": 95, "title": "4. Advent" },
     "files": { "content": "./index.md", "epilogue": "./epilogue.md" }
 }
